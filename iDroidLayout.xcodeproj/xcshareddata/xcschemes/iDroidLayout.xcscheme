@@ -7,10 +7,10 @@
             buildForRunning = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "79642C161603C4E80095D5A2"
                BuildableName = "iDroidLayoutExample.app"
                BlueprintName = "iDroidLayoutExample"
-               ReferencedContainer = "container:iDroidLayout.xcodeproj"
-               BlueprintIdentifier = "79642C161603C4E80095D5A2">
+               ReferencedContainer = "container:iDroidLayout.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

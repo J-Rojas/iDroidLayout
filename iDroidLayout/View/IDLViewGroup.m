@@ -22,10 +22,15 @@
     [super setupFromAttributes:attrs];
 
     NSString *clipString = attrs[@"clipChildren"];
+    bool clipsToBounds = YES;
     if (clipString != nil) {
-        self.clipsToBounds = [clipString boolValue];
-    } else {
-        self.clipsToBounds = YES;
+        clipsToBounds = [clipString boolValue];
+    }
+
+    if (clipsToBounds) {
+        self.layer.masksToBounds = YES;
+        self.layer.shouldRasterize = YES;
+        self.layer.rasterizationScale = [[UIScreen mainScreen] scale];
     }
 }
 
