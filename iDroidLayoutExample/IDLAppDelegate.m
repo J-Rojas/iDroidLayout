@@ -20,6 +20,7 @@
     self.window.backgroundColor = [UIColor whiteColor];
     MainViewController *mainVC = [[MainViewController alloc] init];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:mainVC];
+    navController.navigationBar.translucent = NO;
     self.window.rootViewController = navController;
     [self.window makeKeyAndVisible];
     return YES;

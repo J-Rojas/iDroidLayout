@@ -15,10 +15,18 @@
 
 - (instancetype)initWithAttributes:(NSDictionary *)attrs {
     self = [super initWithAttributes:attrs];
-    if (self) {
-        
-    }
     return self;
+}
+
+- (void)setupFromAttributes:(NSDictionary *)attrs {
+    [super setupFromAttributes:attrs];
+
+    NSString *clipString = attrs[@"clipChildren"];
+    if (clipString != nil) {
+        self.clipsToBounds = [clipString boolValue];
+    } else {
+        self.clipsToBounds = YES;
+    }
 }
 
 /**
