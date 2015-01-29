@@ -27,6 +27,11 @@
             }
         }
     }
+
+    NSString *gravity = attrs[@"gravity"];
+    if (gravity != nil) {
+        [self setGravity:[IDLGravity gravityFromAttribute:gravity]];
+    }
 }
 
 - (void)setGravity:(IDLViewContentGravity)gravity {

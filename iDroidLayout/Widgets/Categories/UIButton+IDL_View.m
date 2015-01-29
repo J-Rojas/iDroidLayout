@@ -125,16 +125,6 @@
     [self setMeasuredDimensionSize:measuredSize];
 }
 
-- (void)setGravity:(IDLViewContentGravity)gravity {
-    if ((gravity & IDLViewContentGravityTop) == IDLViewContentGravityTop) {
-        self.contentVerticalAlignment = UIControlContentVerticalAlignmentTop;
-    } else if ((gravity & IDLViewContentGravityBottom) == IDLViewContentGravityBottom) {
-        self.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
-    } else if ((gravity & IDLViewContentGravityFillVertical) == IDLViewContentGravityFillVertical) {
-        self.contentVerticalAlignment = UIControlContentVerticalAlignmentFill;
-    }
-}
-
 - (void)setPadding:(UIEdgeInsets)padding {
     [super setPadding:padding];
     self.contentEdgeInsets = padding;
