@@ -458,7 +458,7 @@
     }
     
     id alignBaseline = rules[IDLRelativeLayoutRuleAlignBaseline];
-    if (alignBaseline != [NSNull null] && [alignBaseline boolValue]) {
+    if (alignBaseline != [NSNull null] && alignBaseline != nil) {
         _hasBaselineAlignedChild = true;
     }
 }

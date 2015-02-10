@@ -161,4 +161,8 @@
     [self requestLayout];
 }
 
+- (CGFloat)baseline {
+    return self.font.ascender;
+}
+
 @end
