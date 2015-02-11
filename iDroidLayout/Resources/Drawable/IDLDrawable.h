@@ -31,6 +31,8 @@ FOUNDATION_EXPORT NSUInteger const IDLDrawableMaxLevel;
 @property (nonatomic, weak) id<IDLDrawableDelegate> delegate;
 
 - (void)drawInContext:(CGContextRef)context;
+- (void)drawInContext:(CGContextRef)context withRect: (CGRect) rect;
+
 
 - (UIImage *)renderToImage;
 - (BOOL)setLevel:(NSUInteger)level;

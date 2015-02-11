@@ -75,7 +75,11 @@ NSUInteger const IDLDrawableMaxLevel = 10000;
 }
 
 - (void)drawInContext:(CGContextRef)context {
-    OUTLINE_RECT(context, self.bounds);
+    [self drawInContext:context withRect:self.bounds];
+}
+
+- (void)drawInContext:(CGContextRef)context withRect:(CGRect)rect {
+    OUTLINE_RECT(context, rect);
 }
 
 #if OUTLINE_DRAWABLE

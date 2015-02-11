@@ -108,22 +108,24 @@
     return imageOut;
 }
 
-- (void)drawInContext:(CGContextRef)context {
+- (void)drawInContext:(CGContextRef)context withRect: (CGRect) rect {
     IDLBitmapDrawableConstantState *state = self.internalConstantState;
     CGRect containerRect = self.bounds;
-    CGRect dstRect = CGRectZero;
+    CGRect dstRect = rect;
     UIImage *image = state.image;
-    
+    int x = rect.origin.x;
+    int y = rect.origin.y;
+
     [IDLGravity applyGravity:state.gravity width:image.size.width height:image.size.height containerRect:&containerRect outRect:&dstRect];
+    dstRect.origin.x += x;
+    dstRect.origin.y += y;
+
     if (self.scaledImageCache == nil) {
         self.scaledImageCache = [self resizeImage:image toWidth:dstRect.size.width height:dstRect.size.height];
     }
     UIGraphicsPushContext(context);
     //flip the orientation of the drawable image
-    CGContextSaveGState(context);
-    CGContextScaleCTM(context, 1.0, -1.0f);
-    CGContextTranslateCTM(context, 0.0, -self.bounds.size.height);
-    [self.scaledImageCache drawInRect:dstRect];
+    CGContextDrawImage(context, dstRect, self.scaledImageCache.CGImage);
     UIGraphicsPopContext();
 }
 
