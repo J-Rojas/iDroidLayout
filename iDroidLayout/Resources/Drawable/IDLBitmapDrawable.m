@@ -119,6 +119,10 @@
         self.scaledImageCache = [self resizeImage:image toWidth:dstRect.size.width height:dstRect.size.height];
     }
     UIGraphicsPushContext(context);
+    //flip the orientation of the drawable image
+    CGContextSaveGState(context);
+    CGContextScaleCTM(context, 1.0, -1.0f);
+    CGContextTranslateCTM(context, 0.0, -self.bounds.size.height);
     [self.scaledImageCache drawInRect:dstRect];
     UIGraphicsPopContext();
 }
