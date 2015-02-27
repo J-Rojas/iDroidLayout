@@ -108,6 +108,11 @@ static IDLResourceManager *currentResourceManager;
             identifier.bundle = [NSBundle mainBundle];
         } else {
             identifier.bundle = [NSBundle bundleWithIdentifier:identifier.bundleIdentifier];
+            if (identifier.bundle == nil) {
+                identifier.bundle =
+                    [NSBundle bundleWithURL:[[NSBundle mainBundle]
+                        URLForResource:identifier.bundleIdentifier withExtension:@"bundle"]];
+            }
         }
     }
     return identifier.bundle;
