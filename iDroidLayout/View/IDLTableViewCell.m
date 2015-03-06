@@ -13,14 +13,20 @@
 
 @synthesize layoutBridge = _layoutBridge;
 
-
 - (instancetype)initWithLayoutResource:(NSString *)resource reuseIdentifier:(NSString *)reuseIdentifier {
+    return [self initWithLayoutResource:resource
+                        reuseIdentifier:reuseIdentifier
+                               inflater:[[IDLLayoutInflater alloc] init]];
+}
+
+- (instancetype)initWithLayoutResource:(NSString *)resource
+                       reuseIdentifier:(NSString *)reuseIdentifier
+                              inflater: (IDLLayoutInflater *) inflater {
     self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     if (self) {
         IDLLayoutBridge *bridge = [[IDLLayoutBridge alloc] initWithFrame:self.contentView.bounds];
         bridge.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         [self.contentView addSubview:bridge];
-        IDLLayoutInflater *inflater = [[IDLLayoutInflater alloc] init];
         [inflater inflateResource:resource intoRootView:bridge attachToRoot:TRUE];
         
         _layoutBridge = bridge;
@@ -28,13 +34,19 @@
     return self;
 }
 
-- (instancetype)initWithLayoutURL:(NSURL *)url reuseIdentifier:(NSString *)reuseIdentifier {
+- (instancetype)initWithLayoutURL:(NSURL *)url
+                  reuseIdentifier:(NSString *)reuseIdentifier {
+    return [self initWithLayoutURL:url reuseIdentifier:reuseIdentifier inflater:[[IDLLayoutInflater alloc] init]];
+};
+
+- (instancetype)initWithLayoutURL:(NSURL *)url
+                  reuseIdentifier:(NSString *)reuseIdentifier
+                         inflater: (IDLLayoutInflater *) inflater{
     self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     if (self) {
         IDLLayoutBridge *bridge = [[IDLLayoutBridge alloc] initWithFrame:self.contentView.bounds];
         bridge.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         [self.contentView addSubview:bridge];
-        IDLLayoutInflater *inflater = [[IDLLayoutInflater alloc] init];
         [inflater inflateURL:url intoRootView:bridge attachToRoot:TRUE];
         
         _layoutBridge = bridge;

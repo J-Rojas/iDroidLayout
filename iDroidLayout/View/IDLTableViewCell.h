@@ -15,5 +15,7 @@
 
 - (instancetype)initWithLayoutResource:(NSString *)resource reuseIdentifier:(NSString *)reuseIdentifier NS_DESIGNATED_INITIALIZER;
 - (instancetype)initWithLayoutURL:(NSURL *)url reuseIdentifier:(NSString *)reuseIdentifier NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithLayoutResource:(NSString *)resource reuseIdentifier:(NSString *)reuseIdentifier inflater: (IDLLayoutInflater *) inflater NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithLayoutURL:(NSURL *)url reuseIdentifier:(NSString *)reuseIdentifier inflater: (IDLLayoutInflater *) inflater NS_DESIGNATED_INITIALIZER;
 
 @end
