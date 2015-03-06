@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "IDLLayoutBridge.h"
 
+@class IDLLayoutInflater;
+
 @interface IDLTableViewCell : UITableViewCell
 
 @property (weak, nonatomic, readonly) IDLLayoutBridge *layoutBridge;
