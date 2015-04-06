@@ -124,6 +124,11 @@
 		A7434E291A29EEC100A74D40 /* values.xml in Resources */ = {isa = PBXBuildFile; fileRef = A7434E1C1A29EEC100A74D40 /* values.xml */; };
 		A7434E2D1A29EF6200A74D40 /* LayoutFromIB.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7434E2C1A29EF6200A74D40 /* LayoutFromIB.xib */; };
 		A744922219BFA61900E88C18 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A744922119BFA61900E88C18 /* Default-568h@2x.png */; };
+		B31614EB1AD31F7500AFE116 /* UICollectionView+IDL_View.m in Sources */ = {isa = PBXBuildFile; fileRef = B31614E81AD31F7500AFE116 /* UICollectionView+IDL_View.m */; };
+		B31614EC1AD31F7500AFE116 /* UICollectionViewFlowLayout+IDL_Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = B31614EA1AD31F7500AFE116 /* UICollectionViewFlowLayout+IDL_Layout.m */; };
+		BB5C38AB29F23ED7596DD1EC /* IDLCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB5C3625CC17585CC9CAB946 /* IDLCollectionViewCell.m */; };
+		BB5C3DBF661D4CAEB5D6E0C8 /* IDLWatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = BB5C373A284EDC57CD97B7C8 /* IDLWatcher.m */; };
+		BB5C3F2F2E5B215C03BDEE9B /* IDLCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = BB5C31E2587CC633ED10064B /* IDLCollectionViewFlowLayout.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -366,7 +371,17 @@
 		A7434E2C1A29EF6200A74D40 /* LayoutFromIB.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LayoutFromIB.xib; sourceTree = "<group>"; };
 		A744922119BFA61900E88C18 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		ACEF216E1FD53171368A9187 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		B31614E71AD31F7500AFE116 /* UICollectionView+IDL_View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UICollectionView+IDL_View.h"; sourceTree = "<group>"; };
+		B31614E81AD31F7500AFE116 /* UICollectionView+IDL_View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UICollectionView+IDL_View.m"; sourceTree = "<group>"; };
+		B31614E91AD31F7500AFE116 /* UICollectionViewFlowLayout+IDL_Layout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UICollectionViewFlowLayout+IDL_Layout.h"; sourceTree = "<group>"; };
+		B31614EA1AD31F7500AFE116 /* UICollectionViewFlowLayout+IDL_Layout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UICollectionViewFlowLayout+IDL_Layout.m"; sourceTree = "<group>"; };
 		B3466C4187E343C8965C60D0 /* libPods-test.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-test.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB5C309E47BF6D4CD0C5C2F3 /* IDLCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDLCollectionViewFlowLayout.h; sourceTree = "<group>"; };
+		BB5C31E2587CC633ED10064B /* IDLCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDLCollectionViewFlowLayout.m; sourceTree = "<group>"; };
+		BB5C3625CC17585CC9CAB946 /* IDLCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDLCollectionViewCell.m; sourceTree = "<group>"; };
+		BB5C373A284EDC57CD97B7C8 /* IDLWatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDLWatcher.m; sourceTree = "<group>"; };
+		BB5C394B34EFF90C0201E2BD /* IDLWatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDLWatcher.h; sourceTree = "<group>"; };
+		BB5C3DEB1132B8A646A1677F /* IDLCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDLCollectionViewCell.h; sourceTree = "<group>"; };
 		CBE74CB85776E59394A12EA5 /* Pods-iDroidLayout.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iDroidLayout.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iDroidLayout/Pods-iDroidLayout.debug.xcconfig"; sourceTree = "<group>"; };
 		CE5AE02A60FF0464DE8F3699 /* Pods-test.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-test.debug.xcconfig"; path = "Pods/Target Support Files/Pods-test/Pods-test.debug.xcconfig"; sourceTree = "<group>"; };
 		ECD90B80D62044CD8D222D68 /* libPods-framework.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-framework.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -605,6 +620,8 @@
 				79718B131681FF1100414CCE /* UIImage+IDLNinePatch.m */,
 				79DE0ABB1684AFF200EDACE3 /* NSObject+IDL_KVOObserver.h */,
 				79DE0ABC1684AFF200EDACE3 /* NSObject+IDL_KVOObserver.m */,
+				BB5C373A284EDC57CD97B7C8 /* IDLWatcher.m */,
+				BB5C394B34EFF90C0201E2BD /* IDLWatcher.h */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -631,6 +648,10 @@
 				79642C541603C5500095D5A2 /* UIView+IDL_Layout.m */,
 				79642C551603C5500095D5A2 /* UIView+IDL_ViewGroup.h */,
 				79642C561603C5500095D5A2 /* UIView+IDL_ViewGroup.m */,
+				BB5C3DEB1132B8A646A1677F /* IDLCollectionViewCell.h */,
+				BB5C3625CC17585CC9CAB946 /* IDLCollectionViewCell.m */,
+				BB5C309E47BF6D4CD0C5C2F3 /* IDLCollectionViewFlowLayout.h */,
+				BB5C31E2587CC633ED10064B /* IDLCollectionViewFlowLayout.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -667,6 +688,10 @@
 		79642C581603C5500095D5A2 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				B31614E71AD31F7500AFE116 /* UICollectionView+IDL_View.h */,
+				B31614E81AD31F7500AFE116 /* UICollectionView+IDL_View.m */,
+				B31614E91AD31F7500AFE116 /* UICollectionViewFlowLayout+IDL_Layout.h */,
+				B31614EA1AD31F7500AFE116 /* UICollectionViewFlowLayout+IDL_Layout.m */,
 				79642C591603C5500095D5A2 /* UIButton+IDL_View.h */,
 				79642C5A1603C5500095D5A2 /* UIButton+IDL_View.m */,
 				79642C5B1603C5500095D5A2 /* UIControl+IDL_View.h */,
@@ -1137,6 +1162,7 @@
 				794BF852182C508600A6DF05 /* IDLDrawableStateItem.m in Sources */,
 				794BF853182C508600A6DF05 /* IDLDrawableStateList.m in Sources */,
 				794BF854182C508600A6DF05 /* IDLResourceStateItem.m in Sources */,
+				B31614EC1AD31F7500AFE116 /* UICollectionViewFlowLayout+IDL_Layout.m in Sources */,
 				794BF855182C508600A6DF05 /* IDLResourceStateList.m in Sources */,
 				794BF856182C508600A6DF05 /* IDLResourceValueSet.m in Sources */,
 				794BF857182C508600A6DF05 /* IDLStyle.m in Sources */,
@@ -1148,6 +1174,7 @@
 				794BF85D182C508600A6DF05 /* UIColor+IDL_ColorParser.m in Sources */,
 				794BF85E182C508600A6DF05 /* UIImage+IDL_FromColor.m in Sources */,
 				794BF85F182C508600A6DF05 /* TBXML+IDL.m in Sources */,
+				B31614EB1AD31F7500AFE116 /* UICollectionView+IDL_View.m in Sources */,
 				79CEF932182D6C42005E2FD1 /* IDLResourceManager.m in Sources */,
 				794BF860182C508600A6DF05 /* UIImage+IDLNinePatch.m in Sources */,
 				794BF861182C508600A6DF05 /* NSObject+IDL_KVOObserver.m in Sources */,
@@ -1187,6 +1214,9 @@
 				794BF880182C508600A6DF05 /* IDLDependencyGraphNode.m in Sources */,
 				794BF881182C508600A6DF05 /* IDLRelativeLayout.m in Sources */,
 				794BF882182C508600A6DF05 /* IDLRelativeLayoutLayoutParams.m in Sources */,
+				BB5C3DBF661D4CAEB5D6E0C8 /* IDLWatcher.m in Sources */,
+				BB5C38AB29F23ED7596DD1EC /* IDLCollectionViewCell.m in Sources */,
+				BB5C3F2F2E5B215C03BDEE9B /* IDLCollectionViewFlowLayout.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

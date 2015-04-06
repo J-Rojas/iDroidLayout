@@ -15,7 +15,7 @@
     <style name="button_remote">
         <item name="textColor">#000</item>
         <item name="font">Arial-BoldMT</item>
-    </style/>
+    </style>
     
     <string name="username_label">Username:</string>
     <string name="password_label">Password:</string>
@@ -39,4 +39,4 @@
         <item>Layout which includes two other layouts</item>
     </string-array>
 
-</resource>
+</resources>
