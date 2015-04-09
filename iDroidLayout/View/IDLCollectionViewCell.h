@@ -2,8 +2,8 @@
 //  IDLCollectionViewCell.h
 //  iDroidLayout
 //
-//  Created by Tom Quist on 22.07.12.
-//  Copyright (c) 2012 Tom Quist. All rights reserved.
+//  Created by Jose Rojas on 3/31/15.
+//  Copyright (c) 2015 Jose Rojas.
 //
 
 #import <UIKit/UIKit.h>
@@ -14,10 +14,9 @@
 @interface IDLCollectionViewCell : UICollectionViewCell
 
 @property (weak, nonatomic, readonly) IDLLayoutBridge *layoutBridge;
+@property (strong, nonatomic) NSURL *layoutURL;
 
 - (void) setLayoutResource: (NSString *)resource;
-
-- (void) setLayoutURL: (NSURL *)url;
 
 - (void) setLayoutResource: (NSString *)resource
                   inflater: (IDLLayoutInflater *) inflater;
