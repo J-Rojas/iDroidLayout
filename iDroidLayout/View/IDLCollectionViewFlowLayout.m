@@ -4,7 +4,6 @@
 //
 
 #import "IDLCollectionViewFlowLayout.h"
-#import "ViewUtils.h"
 #import <UIKit/UITableView.h>
 
 @implementation IDLCollectionViewFlowLayout
