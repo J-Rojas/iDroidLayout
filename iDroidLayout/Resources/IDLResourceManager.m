@@ -7,12 +7,14 @@
 //
 
 #import "IDLResourceManager+Core.h"
+#import "IDLResourceManager+String.h"
 #import "IDLResourceManager+IDL_Internal.h"
 #import "UIImage+IDL_FromColor.h"
 #import "IDLResourceValueSet.h"
 #import "UIImage+IDLNinePatch.h"
 #import "IDLXMLCache.h"
 #import "IDLColorStateList.h"
+#import "UIColor+IDL_ColorParser.h"
 
 
 @interface IDLResourceManager ()
@@ -168,6 +170,10 @@ static IDLResourceManager *currentResourceManager;
             if (image != nil) {
                 ret = [UIColor colorWithPatternImage:image];
             }
+        } else if (identifier.type == IDLResourceTypeColor) {
+            NSString* retString = [self stringForIdentifier:identifierString];
+            if (retString != nil)
+                ret = [UIColor colorFromIDLColorString:retString];
         }
     }
     return ret;

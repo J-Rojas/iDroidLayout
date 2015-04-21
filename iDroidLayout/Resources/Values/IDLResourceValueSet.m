@@ -54,7 +54,8 @@
                 if ([tagName isEqualToString:@"style"]) {
                     IDLStyle *style = [IDLStyle createFromXMLElement:child];
                     mutableValues[resourceName] = style;
-                } else if ([tagName isEqualToString:@"string"]) {
+                } else if ([tagName isEqualToString:@"string"] ||
+                           [tagName isEqualToString:@"color"]) {
                     NSString *string = [[TBXML textForElement:child] stringByTrimmingCharactersInSet:whiteSpaceCharSet];
                     mutableValues[resourceName] = string;
                 } else if([tagName isEqualToString:@"string-array"]) {
