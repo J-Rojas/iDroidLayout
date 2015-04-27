@@ -11,5 +11,6 @@
 @interface IDLEditText : UITextField
 
 @property (nonatomic, assign) UIControlContentVerticalAlignment contentVerticalAlignment;
+@property (nonatomic) NSString* rawInputType;
 
 @end

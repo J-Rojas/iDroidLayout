@@ -8,7 +8,7 @@
 
 #import "IDLEditText.h"
 #import "UIView+IDL_Layout.h"
-#import "UILabel+IDL_View.h"
+#import "Categories/UITextField+IDL_View.h"
 
 @implementation IDLEditText
 
@@ -57,6 +57,10 @@
     [super setContentVerticalAlignment:contentVerticalAlignment];
     _contentVerticalAlignment = contentVerticalAlignment;
     [self setNeedsDisplay];
+}
+
+- (void)setRawInputType:(NSString *)inputType {
+    [self setInputType:inputType];
 }
 
 - (CGRect)textRectForBounds:(CGRect)bounds {

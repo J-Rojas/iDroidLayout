@@ -9,7 +9,6 @@
 #import "IDLTextView.h"
 #import "UIView+IDL_Layout.h"
 #import "UILabel+IDL_View.h"
-#import "UIView+IDLDrawable.h"
 
 @implementation IDLTextView
 

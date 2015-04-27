@@ -10,6 +10,7 @@
 #import "UIView+IDL_Layout.h"
 #import "IDLMarginLayoutParams.h"
 #import "IDLLayoutInflater.h"
+#import "../Utils/IDLKeyboardListener.h"
 
 @implementation UIView (IDLLayoutBridge)
 
@@ -39,6 +40,7 @@
 
 @implementation IDLLayoutBridge {
     CGRect _lastFrame;
+    CGRect _keyboardFrame;
     BOOL _resizeOnKeyboard;
     BOOL _scrollToTextField;
 }
@@ -133,13 +135,16 @@
     }
 }
 
-- (void)willShowKeyboard:(NSNotification *)notification {
-    CGRect keyboardFrame = [(notification.userInfo)[UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    CGRect kbLocalFrame = [self convertRect:keyboardFrame fromView:self.window];
-    NSLog(@"Show: %@", NSStringFromCGRect(kbLocalFrame));
+- (void) adjustKeyboardFrame {
     CGRect f = self.frame;
-    f.size.height = kbLocalFrame.origin.y;
-    self.frame = f;
+    CGRect rectKeyboard = [[IDLKeyboardListener shared] getLocalKeyboardFrame:self.window toView:self];
+    f.size.height = rectKeyboard.origin.y;
+    _keyboardFrame = f;
+}
+
+- (void)willShowKeyboard:(NSNotification *)notification {
+    [self adjustKeyboardFrame];
+    self.frame = _keyboardFrame;
     NSTimeInterval duration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     [UIView animateWithDuration:duration animations:^{
         [self layoutIfNeeded];
@@ -152,11 +157,9 @@
 }
 
 - (void)willHideKeyboard:(NSNotification *)notification {
-    CGRect keyboardFrame = [(notification.userInfo)[UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    CGRect kbLocalFrame = [self convertRect:keyboardFrame fromView:self.window];
-    NSLog(@"Hide: %@", NSStringFromCGRect(kbLocalFrame));
+    CGRect rectKeyboard = [[IDLKeyboardListener shared] getLocalKeyboardFrame:self.window toView:self];
     CGRect f = self.frame;
-    f.size.height = kbLocalFrame.origin.y;
+    f.size.height = rectKeyboard.origin.y;
     self.frame = f;
     NSTimeInterval duration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     [UIView animateWithDuration:duration animations:^{
@@ -192,6 +195,7 @@
 }
 
 - (void)setResizeOnKeyboard:(BOOL)resizeOnKeyboard {
+    [IDLKeyboardListener shared];
     if (resizeOnKeyboard && !_resizeOnKeyboard) {
         NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
         [center addObserver:self selector:@selector(willShowKeyboard:) name:UIKeyboardWillShowNotification object:nil];
@@ -220,6 +224,19 @@
     } else {
         [super setValue:value forUndefinedKey:key];
     }
+}
+
+- (void)setFrame:(CGRect)frame {
+    if ([[IDLKeyboardListener shared] isVisible]) {
+        if (_keyboardFrame.size.height == 0) {
+            [super setFrame:frame];
+            [self adjustKeyboardFrame];
+        }
+        [super setFrame:_keyboardFrame];
+    } else{
+        [super setFrame:frame];
+    }
+
 }
 
 @end

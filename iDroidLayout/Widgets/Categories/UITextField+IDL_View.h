@@ -7,4 +7,6 @@
 
 @interface UITextField (IDL_View)
 
+- (void)setInputType: (NSString*) inputType;
+
 @end
