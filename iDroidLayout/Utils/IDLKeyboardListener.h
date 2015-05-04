@@ -12,6 +12,6 @@
 
 - (BOOL) isVisible;
 
-- (CGRect) getLocalKeyboardFrame: (UIWindow*) window toView: (UIView*) view;
+- (CGRect) getLocalKeyboardFrame: (UIWindow*) window toView: (UIView*) view notification: (NSNotification *) notification;
 
 @end

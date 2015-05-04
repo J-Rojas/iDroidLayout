@@ -69,7 +69,11 @@ static IDLKeyboardListener* sListener;
 
 }
 
-- (CGRect)getLocalKeyboardFrame:(UIWindow *)window toView: (UIView*) view {
+- (CGRect)getLocalKeyboardFrame:(UIWindow *)window toView: (UIView*) view notification: (NSNotification *) notification {
+    //handle out of order NSNotifications
+    if (_keyboardFrame.size.height == 0) {
+        [self noticeWillShowKeyboard:notification];
+    }
     return [view convertRect:_keyboardFrame fromView:window];
 }
 
