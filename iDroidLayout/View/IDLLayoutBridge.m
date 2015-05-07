@@ -10,7 +10,7 @@
 #import "UIView+IDL_Layout.h"
 #import "IDLMarginLayoutParams.h"
 #import "IDLLayoutInflater.h"
-#import "../Utils/IDLKeyboardListener.h"
+#import "IDLKeyboardListener.h"
 
 @implementation UIView (IDLLayoutBridge)
 
@@ -135,15 +135,15 @@
     }
 }
 
-- (void) adjustKeyboardFrame {
+- (void) adjustKeyboardFrame: (NSNotification *) notification {
     CGRect f = self.frame;
-    CGRect rectKeyboard = [[IDLKeyboardListener shared] getLocalKeyboardFrame:self.window toView:self];
+    CGRect rectKeyboard = [[IDLKeyboardListener shared] getLocalKeyboardFrame:self.window toView:self notification: notification];
     f.size.height = rectKeyboard.origin.y;
     _keyboardFrame = f;
 }
 
 - (void)willShowKeyboard:(NSNotification *)notification {
-    [self adjustKeyboardFrame];
+    [self adjustKeyboardFrame: notification];
     self.frame = _keyboardFrame;
     NSTimeInterval duration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     [UIView animateWithDuration:duration animations:^{
@@ -157,7 +157,7 @@
 }
 
 - (void)willHideKeyboard:(NSNotification *)notification {
-    CGRect rectKeyboard = [[IDLKeyboardListener shared] getLocalKeyboardFrame:self.window toView:self];
+    CGRect rectKeyboard = [[IDLKeyboardListener shared] getLocalKeyboardFrame:self.window toView:self notification: notification];
     CGRect f = self.frame;
     f.size.height = rectKeyboard.origin.y;
     self.frame = f;
@@ -230,7 +230,7 @@
     if ([[IDLKeyboardListener shared] isVisible]) {
         if (_keyboardFrame.size.height == 0) {
             [super setFrame:frame];
-            [self adjustKeyboardFrame];
+            [self adjustKeyboardFrame: nil];
         }
         [super setFrame:_keyboardFrame];
     } else{

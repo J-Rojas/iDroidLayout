@@ -126,10 +126,10 @@
 		A744922219BFA61900E88C18 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A744922119BFA61900E88C18 /* Default-568h@2x.png */; };
 		B31614EB1AD31F7500AFE116 /* UICollectionView+IDL_View.m in Sources */ = {isa = PBXBuildFile; fileRef = B31614E81AD31F7500AFE116 /* UICollectionView+IDL_View.m */; };
 		B31614EC1AD31F7500AFE116 /* UICollectionViewFlowLayout+IDL_Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = B31614EA1AD31F7500AFE116 /* UICollectionViewFlowLayout+IDL_Layout.m */; };
-		BB5C36A36745D48EA10ADC19 /* IDLKeyboardListener.m in Sources */ = {isa = PBXBuildFile; fileRef = BB5C328EC35D2D89DE072BDC /* IDLKeyboardListener.m */; };
+		BB5C30021D499A9E43367F6A /* IDLKeyboardListener.m in Sources */ = {isa = PBXBuildFile; fileRef = BB5C33A7CD70BAF405FFD524 /* IDLKeyboardListener.m */; };
 		BB5C38AB29F23ED7596DD1EC /* IDLCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB5C3625CC17585CC9CAB946 /* IDLCollectionViewCell.m */; };
+		BB5C3A0C66DEF6F3F41BF342 /* IDLKeyboardListener.m in Sources */ = {isa = PBXBuildFile; fileRef = BB5C33A7CD70BAF405FFD524 /* IDLKeyboardListener.m */; };
 		BB5C3A1FDED29D53D8339DBF /* UITextField+IDL_View.m in Sources */ = {isa = PBXBuildFile; fileRef = BB5C35B872D6A69E32F791F8 /* UITextField+IDL_View.m */; };
-		BB5C3F23AC6FE7BB9D9ED2B0 /* IDLKeyboardListener.m in Sources */ = {isa = PBXBuildFile; fileRef = BB5C328EC35D2D89DE072BDC /* IDLKeyboardListener.m */; };
 		BB5C3F2F2E5B215C03BDEE9B /* IDLCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = BB5C31E2587CC633ED10064B /* IDLCollectionViewFlowLayout.m */; };
 /* End PBXBuildFile section */
 
@@ -380,11 +380,11 @@
 		B3466C4187E343C8965C60D0 /* libPods-test.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-test.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB5C309E47BF6D4CD0C5C2F3 /* IDLCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDLCollectionViewFlowLayout.h; sourceTree = "<group>"; };
 		BB5C31E2587CC633ED10064B /* IDLCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDLCollectionViewFlowLayout.m; sourceTree = "<group>"; };
-		BB5C328EC35D2D89DE072BDC /* IDLKeyboardListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDLKeyboardListener.m; sourceTree = "<group>"; };
+		BB5C33A7CD70BAF405FFD524 /* IDLKeyboardListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDLKeyboardListener.m; sourceTree = "<group>"; };
 		BB5C34D1EAB53B0C95427CB0 /* UITextField+IDL_View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+IDL_View.h"; sourceTree = "<group>"; };
 		BB5C35B872D6A69E32F791F8 /* UITextField+IDL_View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+IDL_View.m"; sourceTree = "<group>"; };
 		BB5C3625CC17585CC9CAB946 /* IDLCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDLCollectionViewCell.m; sourceTree = "<group>"; };
-		BB5C3C576AABA46D81031E51 /* IDLKeyboardListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDLKeyboardListener.h; sourceTree = "<group>"; };
+		BB5C3ABB532AEAAFF8FB1A96 /* IDLKeyboardListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDLKeyboardListener.h; sourceTree = "<group>"; };
 		BB5C3DEB1132B8A646A1677F /* IDLCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDLCollectionViewCell.h; sourceTree = "<group>"; };
 		CBE74CB85776E59394A12EA5 /* Pods-iDroidLayout.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iDroidLayout.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iDroidLayout/Pods-iDroidLayout.debug.xcconfig"; sourceTree = "<group>"; };
 		CE5AE02A60FF0464DE8F3699 /* Pods-test.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-test.debug.xcconfig"; path = "Pods/Target Support Files/Pods-test/Pods-test.debug.xcconfig"; sourceTree = "<group>"; };
@@ -624,8 +624,6 @@
 				79718B131681FF1100414CCE /* UIImage+IDLNinePatch.m */,
 				79DE0ABB1684AFF200EDACE3 /* NSObject+IDL_KVOObserver.h */,
 				79DE0ABC1684AFF200EDACE3 /* NSObject+IDL_KVOObserver.m */,
-				BB5C3C576AABA46D81031E51 /* IDLKeyboardListener.h */,
-				BB5C328EC35D2D89DE072BDC /* IDLKeyboardListener.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -656,6 +654,8 @@
 				BB5C3625CC17585CC9CAB946 /* IDLCollectionViewCell.m */,
 				BB5C309E47BF6D4CD0C5C2F3 /* IDLCollectionViewFlowLayout.h */,
 				BB5C31E2587CC633ED10064B /* IDLCollectionViewFlowLayout.m */,
+				BB5C3ABB532AEAAFF8FB1A96 /* IDLKeyboardListener.h */,
+				BB5C33A7CD70BAF405FFD524 /* IDLKeyboardListener.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1214,8 +1214,8 @@
 				794BF882182C508600A6DF05 /* IDLRelativeLayoutLayoutParams.m in Sources */,
 				BB5C38AB29F23ED7596DD1EC /* IDLCollectionViewCell.m in Sources */,
 				BB5C3F2F2E5B215C03BDEE9B /* IDLCollectionViewFlowLayout.m in Sources */,
-				BB5C3F23AC6FE7BB9D9ED2B0 /* IDLKeyboardListener.m in Sources */,
 				BB5C3A1FDED29D53D8339DBF /* UITextField+IDL_View.m in Sources */,
+				BB5C3A0C66DEF6F3F41BF342 /* IDLKeyboardListener.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1239,7 +1239,7 @@
 				79642CD21603C5DB0095D5A2 /* IDLAppDelegate.m in Sources */,
 				79642CD31603C5DB0095D5A2 /* LayoutAnimationsViewController.m in Sources */,
 				79642CD51603C5DB0095D5A2 /* MainViewController.m in Sources */,
-				BB5C36A36745D48EA10ADC19 /* IDLKeyboardListener.m in Sources */,
+				BB5C30021D499A9E43367F6A /* IDLKeyboardListener.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
