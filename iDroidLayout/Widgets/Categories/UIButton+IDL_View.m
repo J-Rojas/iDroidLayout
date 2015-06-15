@@ -81,7 +81,7 @@
         if (drawableStateList != nil) {
             for (NSInteger i=[drawableStateList.items count]-1; i>=0; i--) {
                 IDLDrawableStateItem *item = (drawableStateList.items)[i];
-                [self setBackgroundImage:item.image forState:item.controlState];
+                [self setImage:item.image forState:item.controlState];
             }
         }
     }
