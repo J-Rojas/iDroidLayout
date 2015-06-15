@@ -39,6 +39,22 @@
     return nonMutableArray;
 }
 
++ (NSArray *)parseIntegerArrayFromElement:(TBXMLElement *)element {
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    TBXMLElement *child = element->firstChild;
+    NSCharacterSet *whiteSpaceCharSet = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+    while (child != nil) {
+        NSString *tagName = [TBXML elementName:child];
+        if ([tagName isEqualToString:@"item"]) {
+            NSString *value = [[TBXML textForElement:child] stringByTrimmingCharactersInSet:whiteSpaceCharSet];
+            [array addObject:@(value.integerValue)];
+        }
+        child = child->nextSibling;
+    }
+    NSArray *nonMutableArray = [[NSArray alloc] initWithArray:array];
+    return nonMutableArray;
+}
+
 + (instancetype)inflateParser:(TBXML *)parser {
     IDLResourceValueSet *ret = nil;
     TBXMLElement *root = parser.rootXMLElement;
@@ -61,6 +77,9 @@
                 } else if([tagName isEqualToString:@"string-array"]) {
                     NSArray *stringArray = [self parseStringArrayFromElement:child];
                     mutableValues[resourceName] = stringArray;
+                } else if([tagName isEqualToString:@"integer-array"]) {
+                    NSArray *integerArray = [self parseIntegerArrayFromElement:child];
+                    mutableValues[resourceName] = integerArray;
                 }
             }
             child = child->nextSibling;
@@ -118,5 +137,12 @@
     }
     return ret;
 }
+
+- (NSArray *)integerArrayForName:(NSString *)name {
+    NSArray *ret = nil;
+    id value = (self.values)[name];
+    return value;
+}
+
 
 @end

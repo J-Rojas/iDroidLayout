@@ -13,5 +13,6 @@
 - (NSString *)stringForIdentifier:(NSString *)identifierString;
 
 - (NSArray *)stringArrayForIdentifier:(NSString *)identifierString;
+- (NSArray *)integerArrayForIdentifier:(NSString *)identifierString;
 
 @end

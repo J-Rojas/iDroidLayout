@@ -126,7 +126,6 @@
 		A744922219BFA61900E88C18 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A744922119BFA61900E88C18 /* Default-568h@2x.png */; };
 		B31614EB1AD31F7500AFE116 /* UICollectionView+IDL_View.m in Sources */ = {isa = PBXBuildFile; fileRef = B31614E81AD31F7500AFE116 /* UICollectionView+IDL_View.m */; };
 		B31614EC1AD31F7500AFE116 /* UICollectionViewFlowLayout+IDL_Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = B31614EA1AD31F7500AFE116 /* UICollectionViewFlowLayout+IDL_Layout.m */; };
-		BB5C30021D499A9E43367F6A /* IDLKeyboardListener.m in Sources */ = {isa = PBXBuildFile; fileRef = BB5C33A7CD70BAF405FFD524 /* IDLKeyboardListener.m */; };
 		BB5C38AB29F23ED7596DD1EC /* IDLCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB5C3625CC17585CC9CAB946 /* IDLCollectionViewCell.m */; };
 		BB5C3A0C66DEF6F3F41BF342 /* IDLKeyboardListener.m in Sources */ = {isa = PBXBuildFile; fileRef = BB5C33A7CD70BAF405FFD524 /* IDLKeyboardListener.m */; };
 		BB5C3A1FDED29D53D8339DBF /* UITextField+IDL_View.m in Sources */ = {isa = PBXBuildFile; fileRef = BB5C35B872D6A69E32F791F8 /* UITextField+IDL_View.m */; };
@@ -1239,7 +1238,6 @@
 				79642CD21603C5DB0095D5A2 /* IDLAppDelegate.m in Sources */,
 				79642CD31603C5DB0095D5A2 /* LayoutAnimationsViewController.m in Sources */,
 				79642CD51603C5DB0095D5A2 /* MainViewController.m in Sources */,
-				BB5C30021D499A9E43367F6A /* IDLKeyboardListener.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

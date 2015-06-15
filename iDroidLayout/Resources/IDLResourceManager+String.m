@@ -60,6 +60,27 @@
     return array;
 }
 
+- (NSArray *)integerArrayForIdentifier:(NSString *)identifierString {
+    NSArray *array = nil;
+    IDLResourceIdentifier *identifier = [self resourceIdentifierForString:identifierString];
+    if (identifier.type == IDLResourceTypeArray) {
+        if (identifier.cachedObject != nil) {
+            array = identifier.cachedObject;
+        } else if (identifier != nil) {
+            IDLResourceValueSet *valueSet = [self resourceValueSetForIdentifier:identifierString];
+            if (valueSet != nil) {
+                NSRange range = [identifier.identifier rangeOfString:@"."];
+                if (range.location != NSNotFound && range.location > 0) {
+                    array = [valueSet integerArrayForName:[identifier.identifier substringFromIndex:range.location+1]];
+                }
+            }
+            if (array != nil) {
+                identifier.cachedObject = array;
+            }
+        }
+    }
+    return array;
+}
 
 
 @end

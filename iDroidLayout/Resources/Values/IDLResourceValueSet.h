@@ -11,6 +11,7 @@
 
 @interface IDLResourceValueSet : NSObject
 
+- (NSArray *)integerArrayForName:(NSString *)name;
 - (IDLStyle *)styleForName:(NSString *)name;
 - (NSString *)stringForName:(NSString *)name;
 - (NSArray *)stringArrayForName:(NSString *)name;
