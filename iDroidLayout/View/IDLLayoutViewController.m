@@ -60,7 +60,11 @@
     if (_layoutUrl != nil) {
         IDLLayoutInflater *inflater = [[IDLLayoutInflater alloc] init];
         inflater.actionTarget = self;
-        [inflater inflateURL:_layoutUrl intoRootView:bridge attachToRoot:TRUE];
+        @try {
+            [inflater inflateURL:_layoutUrl intoRootView:bridge attachToRoot:TRUE];
+        } @catch (NSException * exception) {
+            [NSException raise:@"IDLLayoutViewControllerException" format:@"could not load layout %@: %@", _layoutUrl.lastPathComponent, exception];
+        }
     }
     self.view = bridge;
 }

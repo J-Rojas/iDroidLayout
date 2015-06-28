@@ -67,8 +67,8 @@
         ret = [self.viewFactory onCreateViewWithName:name attributes:attrs];
     }
     @catch (NSException *exception) {
-        NSLog(@"Warning!!!!! Could not initialize class for view with name %@. Creating UIView instead: %@", name, exception);
-        ret = [self.viewFactory onCreateViewWithName:@"UIView" attributes:attrs];
+        NSLog(@"Could not initialize class for view with name %@. Exception: %@", name, exception);
+        @throw exception;
     }
     return ret;
 }
