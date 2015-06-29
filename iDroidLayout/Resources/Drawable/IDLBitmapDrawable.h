@@ -13,6 +13,8 @@
 
 - (instancetype)initWithImage:(UIImage *)image NS_DESIGNATED_INITIALIZER;
 
+@property (nonatomic, readonly, strong) UIImage * image;
+
 @end
 
 @interface IDLBitmapDrawableConstantState : IDLDrawableConstantState
