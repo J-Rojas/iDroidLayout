@@ -67,6 +67,8 @@
         }
     }
     self.view = bridge;
+    //turn off scroll insets by default
+    self.automaticallyAdjustsScrollViewInsets = NO;
 }
 
 - (IDLLayoutBridge *)view {

@@ -262,7 +262,9 @@ static char matchParentChildrenKey;
     IDLLayoutMeasureSpec childWidthMeasureSpec = [self childMeasureSpecWithMeasureSpec:parentWidthMeasureSpec padding:(padding.left + padding.right + lpMargin.left + lpMargin.right + widthUsed) childDimension:lp.width];
     IDLLayoutMeasureSpec childHeightMeasureSpec;
     childHeightMeasureSpec.size = lpMargin.top + lpMargin.bottom + parentHeightMeasureSpec.size;
-    childHeightMeasureSpec.mode = IDLLayoutMeasureSpecModeUnspecified;
+
+    //JLR - Changed from Unspecified to Exactly to fix layout problem with children that uses layout_weight.
+    childHeightMeasureSpec.mode = IDLLayoutMeasureSpecModeExactly;
     
     [child measureWithWidthMeasureSpec:childWidthMeasureSpec heightMeasureSpec:childHeightMeasureSpec];
 }
