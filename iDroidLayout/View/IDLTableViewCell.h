@@ -20,4 +20,10 @@
 - (instancetype)initWithLayoutResource:(NSString *)resource reuseIdentifier:(NSString *)reuseIdentifier inflater: (IDLLayoutInflater *) inflater NS_DESIGNATED_INITIALIZER;
 - (instancetype)initWithLayoutURL:(NSURL *)url reuseIdentifier:(NSString *)reuseIdentifier inflater: (IDLLayoutInflater *) inflater NS_DESIGNATED_INITIALIZER;
 
+- (void) setupWithLayoutResource: (NSString*) resource
+                        inflater: (IDLLayoutInflater *) inflater;
+- (void) setupWithLayoutURL: (NSURL*) resource
+                   inflater: (IDLLayoutInflater *) inflater;
+
+
 @end

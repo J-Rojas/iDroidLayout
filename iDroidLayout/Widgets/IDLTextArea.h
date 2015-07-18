@@ -10,6 +10,8 @@
 
 @interface IDLTextArea : UITextView
 
+@property (nonatomic, strong) NSString* placeholder;
+@property (nonatomic, copy) UIColor* placeholderColor;
 @property (nonatomic, assign) UIControlContentVerticalAlignment contentVerticalAlignment;
 
 @end

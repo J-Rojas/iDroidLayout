@@ -24,12 +24,7 @@
                               inflater: (IDLLayoutInflater *) inflater {
     self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     if (self) {
-        IDLLayoutBridge *bridge = [[IDLLayoutBridge alloc] initWithFrame:self.contentView.bounds];
-        bridge.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        [self.contentView addSubview:bridge];
-        [inflater inflateResource:resource intoRootView:bridge attachToRoot:TRUE];
-        
-        _layoutBridge = bridge;
+        [self setupWithLayoutResource:resource inflater:inflater];
     }
     return self;
 }
@@ -44,18 +39,37 @@
                          inflater: (IDLLayoutInflater *) inflater{
     self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     if (self) {
-        IDLLayoutBridge *bridge = [[IDLLayoutBridge alloc] initWithFrame:self.contentView.bounds];
-        bridge.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        [self.contentView addSubview:bridge];
-        [inflater inflateURL:url intoRootView:bridge attachToRoot:TRUE];
-        
-        _layoutBridge = bridge;
+        [self setupWithLayoutURL:url inflater:inflater];
     }
     return self;
 }
 
+- (void) setupWithLayoutResource: (NSString*) resource
+                        inflater: (IDLLayoutInflater *) inflater {
+    IDLLayoutBridge *bridge = [[IDLLayoutBridge alloc] initWithFrame:self.contentView.bounds];
+    bridge.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [self.contentView addSubview:bridge];
+    [inflater inflateResource:resource intoRootView:bridge attachToRoot:TRUE];
+
+    _layoutBridge = bridge;
+}
+
+- (void) setupWithLayoutURL:(NSURL*) url
+                   inflater: (IDLLayoutInflater *) inflater {
+    IDLLayoutBridge *bridge = [[IDLLayoutBridge alloc] initWithFrame:self.contentView.bounds];
+    bridge.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [self.contentView addSubview:bridge];
+    [inflater inflateURL:url intoRootView:bridge attachToRoot:TRUE];
+
+    _layoutBridge = bridge;
+}
+
 - (BOOL)isViewGroup {
     return TRUE;
+}
+
+- (void)setFrame:(CGRect)frame {
+    [super setFrame:frame];
 }
 
 @end
