@@ -70,6 +70,12 @@ static char visibilityKey;
     if (background != nil) {
         self.backgroundColor = background;
     }*/
+
+    //clickable
+    NSString* clickable = attrs[@"clickable"];
+    if (clickable != nil)
+        self.userInteractionEnabled = [clickable isEqualToString:@"true"];
+
     NSString *backgroundString = attrs[@"background"];
     if (backgroundString != nil) {
         self.backgroundDrawable = [[IDLResourceManager currentResourceManager] drawableForIdentifier:backgroundString];
