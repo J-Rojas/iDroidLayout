@@ -80,7 +80,24 @@ static char visibilityKey;
     if (backgroundString != nil) {
         self.backgroundDrawable = [[IDLResourceManager currentResourceManager] drawableForIdentifier:backgroundString];
     }
-    
+
+    NSString *onClickAction = attrs[@"onClick"];
+    if (onClickAction != nil &&
+        ![self isKindOfClass:[UIControl class]]) {
+
+        id delegate = attrs[IDLViewAttributeActionTarget];
+        if (delegate != nil) {
+            NSString *onClickSelector = [attrs stringFromIDLValueForKey:@"onClick"];
+            SEL selector = NULL;
+            if (onClickSelector != nil && (selector = NSSelectorFromString(onClickSelector)) != NULL) {
+                UITapGestureRecognizer * tapGestureRecognizer = [UITapGestureRecognizer new];
+                [tapGestureRecognizer addTarget:delegate action:selector];
+
+                [self addGestureRecognizer:tapGestureRecognizer];
+            }
+        }
+    }
+
     // padding
     NSString *paddingString = attrs[@"padding"];
     if (paddingString != nil) {

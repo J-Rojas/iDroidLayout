@@ -82,6 +82,7 @@ BOOL BOOLFromString(NSString *boolString);
 - (void)onLayoutWithFrame:(CGRect)frame didFrameChange:(BOOL)changed;
 - (void)setMeasuredDimensionSize:(IDLLayoutMeasuredSize)size;
 - (void)requestLayout;
+- (void)measureAndLayout;
 - (void)onFinishInflate;
 - (UIView *)findViewById:(NSString *)identifier;
 
