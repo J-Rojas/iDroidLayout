@@ -33,6 +33,8 @@ UIKIT_EXTERN const IDLGradientDrawableCornerRadius IDLGradientDrawableCornerRadi
 
 @interface IDLGradientDrawable : IDLDrawable
 
+@property (nonatomic, strong) NSArray* colors;
+
 @end
 
 @interface IDLGradientDrawableConstantState : IDLDrawableConstantState

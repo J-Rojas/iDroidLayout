@@ -237,12 +237,13 @@ BOOL IDLGradientDrawableCornerRadiusEqualsCornerRadius(IDLGradientDrawableCorner
 - (void)drawInContext:(CGContextRef)context {
     CGRect rect = self.bounds;
     IDLGradientDrawableConstantState *state = self.internalConstantState;
+    NSArray* colors = self.colors ? self.colors : state.colors;
     if (state.shape != IDLGradientDrawableShapeLine) {
-        if ([state.colors count] == 1) {
+        if ([colors count] == 1) {
             [self createPathInContext:context forRect:rect];
-            CGContextSetFillColorWithColor(context, [state.colors[0] CGColor]);
+            CGContextSetFillColorWithColor(context, [colors[0] CGColor]);
             CGContextDrawPath(context, kCGPathFill);
-        } else if ([state.colors count] > 1) {
+        } else if ([colors count] > 1) {
             [self createPathInContext:context forRect:rect];
             CGContextSaveGState(context);
             CGContextClip(context);
