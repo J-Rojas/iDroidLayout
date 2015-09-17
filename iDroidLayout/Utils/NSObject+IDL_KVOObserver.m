@@ -32,7 +32,6 @@
     self.identifier = nil;
     self.observerBlock = nil;
     self.keyPaths = nil;
-    [super dealloc];
 }
 
 - (instancetype)initWithIdentifier:(NSString *)identifier object:(id)obj keyPaths:(NSArray *)keyPaths options:(NSKeyValueObservingOptions)options observerBlock:(IDLKVOObserverBlock)block {
@@ -70,7 +69,7 @@ static char idl_kvoObserversKey;
     @synchronized(self) {
         NSMutableDictionary *array = objc_getAssociatedObject(self, &idl_kvoObserversKey);
         if (array == nil) {
-            array = [[[NSMutableDictionary alloc] init] autorelease];
+            array = [[NSMutableDictionary alloc] init];
             objc_setAssociatedObject(self,
                                      &idl_kvoObserversKey,
                                      array,
@@ -88,7 +87,6 @@ static char idl_kvoObserversKey;
 - (void)idl_addObserver:(IDLKVOObserverBlock)observer withIdentifier:(NSString *)identifier forKeyPaths:(NSArray *)keyPaths options:(NSKeyValueObservingOptions)options {
     IDLKVOObserver *observerObject = [[IDLKVOObserver alloc] initWithIdentifier:identifier object:self keyPaths:keyPaths options:options observerBlock:observer];
     [self idl_kvoObservers][identifier] = observerObject;
-    [observerObject release];
 }
 
 - (BOOL)idl_hasObserverWithIdentifier:(NSString *)identifier {
