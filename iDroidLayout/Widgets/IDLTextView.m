@@ -24,19 +24,24 @@
     measuredSize.width.state = IDLLayoutMeasuredStateNone;
     measuredSize.height.state = IDLLayoutMeasuredStateNone;
     UIEdgeInsets padding = self.padding;
-    
-    
+
+    bool bHasAttributes = [self respondsToSelector:@selector(attributedText)];
+
     if (widthMode == IDLLayoutMeasureSpecModeExactly) {
         measuredSize.width.size = widthSize;
     } else {
         CGSize size;
-        if ([self respondsToSelector:@selector(attributedText)]) {
-            size = [self.attributedText boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX)
-                                         options:NSStringDrawingUsesLineFragmentOrigin
-                                         context:nil].size;
-        } else {
-            [self.text sizeWithFont:self.font];
+        size = [self.text boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX)
+                                       options:NSStringDrawingUsesLineFragmentOrigin
+                                    attributes:@{NSFontAttributeName: self.font}
+                                       context:nil].size;
+        if (bHasAttributes) {
+            CGSize attributedTextSize = [self.attributedText boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin context:nil].size;
+            if (attributedTextSize.width > size.width) {
+                size = attributedTextSize;
+            }
         }
+
         measuredSize.width.size = ceilf(size.width) + padding.left + padding.right;
         if (widthMode == IDLLayoutMeasureSpecModeAtMost) {
             measuredSize.width.size = MIN(measuredSize.width.size, widthSize);
@@ -49,11 +54,15 @@
         measuredSize.height.size = heightSize;
     } else {
         CGSize size;
-        if ([self respondsToSelector:@selector(attributedText)]) {
-            size = [self.text boundingRectWithSize:CGSizeMake(measuredSize.width.size - padding.left - padding.right, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: self.font} context:nil].size;
-        } else {
-            size = [self.text sizeWithFont:self.font constrainedToSize:CGSizeMake(measuredSize.width.size - padding.left - padding.right, CGFLOAT_MAX) lineBreakMode:self.lineBreakMode];
+        size = [self.text boundingRectWithSize:CGSizeMake(measuredSize.width.size - padding.left - padding.right, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: self.font} context:nil].size;
+
+        if (bHasAttributes) {
+            CGSize attributedTextSize = [self.attributedText boundingRectWithSize:CGSizeMake(measuredSize.width.size - padding.left - padding.right, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin context:nil].size;
+            if (attributedTextSize.height > size.height) {
+                size = attributedTextSize;
+            }
         }
+
         measuredSize.height.size = MAX(ceilf(size.height), self.numberOfLines * self.font.lineHeight) + padding.top + padding.bottom;
         if (heightMode == IDLLayoutMeasureSpecModeAtMost) {
             measuredSize.height.size = MIN(measuredSize.height.size, heightSize);
