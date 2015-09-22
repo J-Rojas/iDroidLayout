@@ -15,5 +15,6 @@ typedef void(^IDLKVOObserverBlock)(NSString *keyPath, id object, NSDictionary *c
 - (void)idl_addObserver:(IDLKVOObserverBlock)observer withIdentifier:(NSString *)identifier forKeyPaths:(NSArray *)keyPaths options:(NSKeyValueObservingOptions)options;
 - (void)idl_removeObserverWithIdentifier:(NSString *)identifier;
 - (BOOL)idl_hasObserverWithIdentifier:(NSString *)identifier;
+- (void)idl_removeAllObservers;
 
 @end

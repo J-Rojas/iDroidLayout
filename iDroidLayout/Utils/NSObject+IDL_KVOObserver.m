@@ -94,4 +94,10 @@ static char idl_kvoObserversKey;
     return observers[identifier] != nil;
 }
 
+- (void)idl_removeAllObservers {
+    for (NSString* identifier in self.idl_kvoObservers.allKeys) {
+        [self idl_removeObserverWithIdentifier:identifier];
+    }
+}
+
 @end

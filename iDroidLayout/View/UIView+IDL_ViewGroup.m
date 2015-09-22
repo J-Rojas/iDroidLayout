@@ -7,6 +7,7 @@
 //
 
 #import "UIView+IDL_ViewGroup.h"
+#import "UIView+IDL_KVOObserver.h"
 #import "IDLMarginLayoutParams.h"
 
 @implementation UIView (IDL_ViewGroup)
@@ -237,7 +238,7 @@
 }
 
 - (void)onViewRemoved:(UIView *)view {
-    
+    [self idl_removeKVOObservers];
 }
 
 @end

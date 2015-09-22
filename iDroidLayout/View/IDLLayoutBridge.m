@@ -11,6 +11,7 @@
 #import "IDLMarginLayoutParams.h"
 #import "IDLLayoutInflater.h"
 #import "IDLKeyboardListener.h"
+#import "UIView+IDL_KVOObserver.h"
 
 @implementation UIView (IDLLayoutBridge)
 
@@ -49,6 +50,9 @@
 @synthesize scrollToTextField = _scrollToTextField;
 
 - (void)dealloc {
+
+    [self idl_removeKVOObservers];
+
 	if (_resizeOnKeyboard) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
         [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
