@@ -101,8 +101,13 @@
             [self measureChildWithMargins:child parentWidthMeasureSpec:widthMeasureSpec widthUsed:0 parentHeightMeasureSpec:heightMeasureSpec heightUsed:0];
         }
     }
-    
-    //[self measureChildrenWithWidthMeasureSpec:widthMeasureSpec heightMeasureSpec:heightMeasureSpec];
+
+    IDLLayoutMeasuredSize measuredSize;
+    measuredSize.width.state = IDLLayoutMeasuredStateNone;
+    measuredSize.width.size = widthMeasureSpec.size;
+    measuredSize.height.state = IDLLayoutMeasuredStateNone;
+    measuredSize.height.size = heightMeasureSpec.size;
+    [self setMeasuredDimensionSize:measuredSize];
 }
 
 - (IDLLayoutParams *)generateDefaultLayoutParams {

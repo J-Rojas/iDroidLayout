@@ -6,7 +6,6 @@
 //  Copyright (c) 2013 Tom Quist. All rights reserved.
 //
 
-#import <ViewUtils/ViewUtils.h>
 #import "IDLTextArea.h"
 #import "UIView+IDL_Layout.h"
 #import "UILabel+IDL_View.h"
