@@ -47,6 +47,8 @@
 }
 
 - (id<CAAction>)actionForKey:(NSString *)event {
+    if (self.delegate)
+        return [super actionForKey:event];
     return nil;
 }
 
