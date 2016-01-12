@@ -160,6 +160,10 @@
     return self.internalConstantState.drawable.hasPadding;
 }
 
+- (IDLDrawable *)currentDrawable {
+    return self.internalConstantState.drawable;
+}
+
 #pragma mark - IDLDrawableDelegate
 
 - (void)drawableDidInvalidate:(IDLDrawable *)drawable {

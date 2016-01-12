@@ -27,11 +27,10 @@
         clipsToBounds = [clipString boolValue];
     }
 
-    if (clipsToBounds) {
-        self.layer.masksToBounds = YES;
-        self.layer.shouldRasterize = YES;
-        self.layer.rasterizationScale = [[UIScreen mainScreen] scale];
-    }
+    self.layer.masksToBounds = clipsToBounds;
+    self.layer.shouldRasterize = clipsToBounds;
+    self.clipsToBounds = clipsToBounds;
+    self.layer.rasterizationScale = [[UIScreen mainScreen] scale];
 }
 
 /**

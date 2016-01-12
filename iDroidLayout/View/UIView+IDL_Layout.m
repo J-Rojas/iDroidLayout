@@ -157,6 +157,21 @@ static char visibilityKey;
     if (cornerRadius != nil) {
         self.layer.cornerRadius = [cornerRadius floatValue];
     }
+
+    //shadow
+    CGFloat xOffset = [attrs dimensionFromIDLValueForKey:@"shadowHorizontalOffset" defaultValue:0];
+    CGFloat yOffset = [attrs dimensionFromIDLValueForKey:@"shadowVerticalOffset" defaultValue:0];
+    UIColor* shadowColor = [attrs colorFromIDLValueForKey:@"shadowColor"];
+    CGFloat shadowRadius = [attrs dimensionFromIDLValueForKey:@"shadowRadius" defaultValue:0];
+    CGFloat shadowOpacity = [attrs fractionValueFromIDLValueForKey:@"shadowOpacity" defaultValue:1.0];
+
+    if (shadowColor) {
+        self.layer.shadowColor = [shadowColor CGColor];
+        self.layer.shadowRadius = shadowRadius;
+        self.layer.shadowOffset = CGSizeMake(xOffset, yOffset);
+        self.layer.shadowOpacity = shadowOpacity;
+    }
+
 }
 
 - (instancetype)initWithAttributes:(NSDictionary *)attrs {

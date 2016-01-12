@@ -299,7 +299,8 @@ BOOL IDLGradientDrawableCornerRadiusEqualsCornerRadius(IDLGradientDrawableCorner
     }
     BOOL drawStroke = state.strokeWidth > 0 && state.strokeColor != nil;
     if (drawStroke) {
-        [self createPathInContext:context forRect:rect];
+        CGRect rectStroke = CGRectMake(rect.origin.x + (float) state.strokeWidth / 2, rect.origin.y + (float) state.strokeWidth / 2, rect.size.width - state.strokeWidth, rect.size.height - state.strokeWidth);
+        [self createPathInContext:context forRect:rectStroke];
         CGContextSetLineWidth(context, state.strokeWidth);
         if (state.dashWidth > 0.f) {
             CGFloat lengths[2] = {state.dashWidth, state.dashGap};
