@@ -101,7 +101,7 @@ static char visibilityKey;
     // padding
     NSString *paddingString = attrs[@"padding"];
     if (paddingString != nil) {
-        CGFloat padding = [paddingString floatValue];
+        CGFloat padding = [attrs dimensionFromIDLValueForKey:@"padding"];
         self.padding = UIEdgeInsetsMake(padding, padding, padding, padding);
     } else {
         UIEdgeInsets padding = self.padding;
@@ -110,10 +110,10 @@ static char visibilityKey;
         NSString *paddingLeftString = attrs[@"paddingLeft"];
         NSString *paddingBottomString = attrs[@"paddingBottom"];
         NSString *paddingRightString = attrs[@"paddingRight"];
-        if ([paddingTopString length] > 0) padding.top = [paddingTopString floatValue];
-        if ([paddingLeftString length] > 0) padding.left = [paddingLeftString floatValue];
-        if ([paddingBottomString length] > 0) padding.bottom = [paddingBottomString floatValue];
-        if ([paddingRightString length] > 0) padding.right = [paddingRightString floatValue];
+        if ([paddingTopString length] > 0) padding.top = [attrs dimensionFromIDLValueForKey:@"paddingTop"];
+        if ([paddingLeftString length] > 0) padding.left = [attrs dimensionFromIDLValueForKey:@"paddingLeft"];
+        if ([paddingBottomString length] > 0) padding.bottom = [attrs dimensionFromIDLValueForKey:@"paddingBottom"];
+        if ([paddingRightString length] > 0) padding.right = [attrs dimensionFromIDLValueForKey:@"paddingRight"];
         if (!UIEdgeInsetsEqualToEdgeInsets(padding, initialPadding)) {
             self.padding = padding;
         }
@@ -127,8 +127,8 @@ static char visibilityKey;
     }
     
     // minSize
-    CGFloat minWidth = [attrs[@"minWidth"] floatValue];
-    CGFloat minHeight = [attrs[@"minHeight"] floatValue];
+    CGFloat minWidth = [attrs dimensionFromIDLValueForKey:@"minWidth"];
+    CGFloat minHeight = [attrs dimensionFromIDLValueForKey:@"minHeight"];
     self.minSize = CGSizeMake(minWidth, minHeight);
     
     // identifier
@@ -147,7 +147,7 @@ static char visibilityKey;
     // border
     NSString *borderWidth = attrs[@"borderWidth"];
     if (borderWidth != nil) {
-        self.layer.borderWidth = [borderWidth floatValue];
+        self.layer.borderWidth = [attrs dimensionFromIDLValueForKey:@"borderWidth"];
     }
     UIColor *borderColor = [attrs colorFromIDLValueForKey:@"borderColor"];
     if (borderColor != nil) {

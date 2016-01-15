@@ -60,9 +60,9 @@
     } else if ([value isKindOfClass:[NSString class]]) {
         if ([[IDLResourceManager currentResourceManager] isValidIdentifier:value]) {
 #warning Implement dimension resources
-        } else {
-            ret = [value floatValue];
+            value = [[IDLResourceManager currentResourceManager] stringForIdentifier:value];
         }
+        ret = [value floatValue];
     } else if ([value isKindOfClass:[NSNumber class]]) {
         ret = [value floatValue];
     }
@@ -82,6 +82,7 @@
         NSString *stringValue = nil;
         if ([[IDLResourceManager currentResourceManager] isValidIdentifier:value]) {
 #warning Implement dimension resources
+            stringValue = [[IDLResourceManager currentResourceManager] stringForIdentifier:value];
         } else {
             stringValue = value;
         }
@@ -103,6 +104,7 @@
         NSString *stringValue = nil;
         if ([[IDLResourceManager currentResourceManager] isValidIdentifier:value]) {
 #warning Implement dimension resources
+            stringValue = [[IDLResourceManager currentResourceManager] stringForIdentifier:value];
         } else {
             stringValue = value;
         }
@@ -125,6 +127,7 @@
     } else if ([value isKindOfClass:[NSString class]]) {
         if ([[IDLResourceManager currentResourceManager] isValidIdentifier:value]) {
 #warning Implement dimension resources
+            ret = [[IDLResourceManager currentResourceManager] stringForIdentifier:value].boolValue;
         } else {
             ret = [value boolValue];
         }

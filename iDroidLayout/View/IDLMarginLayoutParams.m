@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 Tom Quist. All rights reserved.
 //
 
+#import <iDroidLayout/NSDictionary+IDL_ResourceManager.h>
 #import "IDLMarginLayoutParams.h"
 
 @implementation IDLMarginLayoutParams
@@ -38,14 +39,14 @@
     if (self) {
         NSString *marginString = attrs[@"layout_margin"];
         if (marginString != nil) {
-            CGFloat margin = [marginString floatValue];
+            CGFloat margin = [attrs dimensionFromIDLValueForKey:@"layout_margin"];
             _margin = UIEdgeInsetsMake(margin, margin, margin, margin);
         } else {
-            NSString *marginLeftString = attrs[@"layout_marginLeft"];
-            NSString *marginTopString = attrs[@"layout_marginTop"];
-            NSString *marginBottomString = attrs[@"layout_marginBottom"];
-            NSString *marginRightString = attrs[@"layout_marginRight"];
-            _margin = UIEdgeInsetsMake([marginTopString floatValue], [marginLeftString floatValue], [marginBottomString floatValue], [marginRightString floatValue]);
+            CGFloat marginLeft = [attrs dimensionFromIDLValueForKey:@"layout_marginLeft"];
+            CGFloat marginTop = [attrs dimensionFromIDLValueForKey:@"layout_marginTop"];
+            CGFloat marginBottom = [attrs dimensionFromIDLValueForKey:@"layout_marginBottom"];
+            CGFloat marginRight = [attrs dimensionFromIDLValueForKey:@"layout_marginRight"];
+            _margin = UIEdgeInsetsMake(marginTop, marginLeft, marginBottom, marginRight);
         }
     }
     return self;
