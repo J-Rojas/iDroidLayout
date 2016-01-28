@@ -50,6 +50,8 @@
         if (valid) {
             ret = [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
         }
+    } else if ([string isEqualToString:@"transparent"]) {
+        ret = [UIColor clearColor];
     }
     return ret;
 }
