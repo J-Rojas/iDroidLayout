@@ -3,10 +3,9 @@
 // Copyright (c) 2015 Jose Rojas. All rights reserved.
 //
 
-#import "IDLCollectionViewFlowLayout.h"
-#import <UIKit/UITableView.h>
+#import "IDLCollectionViewUniformFlowLayout.h"
 
-@implementation IDLCollectionViewFlowLayout
+@implementation IDLCollectionViewUniformFlowLayout
 
 - (instancetype) init {
     self = [super init];
@@ -46,21 +45,17 @@
         return atts;
 
     /*
-      assuming the items all have equal horizontal spacing... (won't work in more complex flow layouts)
+      assuming the items all have equal horizontal spacing and equal widths... (won't work in more complex flow layouts)
       eliminate the extra spacing by removing the delta between the actual spacing and the maximum spacing.
      */
 
     NSIndexPath* ipPrev = [NSIndexPath indexPathForItem:indexPath.item - 1 inSection:indexPath.section];
     CGRect fPrev = [super layoutAttributesForItemAtIndexPath:ipPrev].frame;
-    CGFloat rightPrev = fPrev.origin.x + fPrev.size.width;
-
-    if (isnan(*spacing)) {
-        //calculate the spacing correction between items
-        *spacing = fmaxf((atts.frame.origin.x - rightPrev) - self.maximumInteritemSpacing, 0);
-    }
+    CGFloat rightPrev = indexPath.item * fPrev.size.width;
+    CGFloat spacingValue = fmaxf(fminf(atts.frame.origin.x - rightPrev, self.maximumInteritemSpacing), self.minimumInteritemSpacing);
 
     //adjust the rightPrev based on previous spacing
-    rightPrev -= *spacing * (indexPath.item - 1);
+    rightPrev += spacingValue * indexPath.item;
 
     //handle maximum interitem spacing
     if (atts.frame.origin.x <= rightPrev) //the current applied spacing is within range
@@ -69,7 +64,9 @@
     CGRect f = atts.frame;
     f.origin.x = rightPrev;
     atts.frame = f;
+
     return atts;
+
 }
 
 @end

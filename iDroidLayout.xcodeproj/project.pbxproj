@@ -126,6 +126,7 @@
 		A744922219BFA61900E88C18 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A744922119BFA61900E88C18 /* Default-568h@2x.png */; };
 		B31614EB1AD31F7500AFE116 /* UICollectionView+IDL_View.m in Sources */ = {isa = PBXBuildFile; fileRef = B31614E81AD31F7500AFE116 /* UICollectionView+IDL_View.m */; };
 		B31614EC1AD31F7500AFE116 /* UICollectionViewFlowLayout+IDL_Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = B31614EA1AD31F7500AFE116 /* UICollectionViewFlowLayout+IDL_Layout.m */; };
+		BB5C31957586C1E2191B7666 /* IDLCollectionViewUniformFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = BB5C34B91F92CDB9E7B66A00 /* IDLCollectionViewUniformFlowLayout.m */; };
 		BB5C38AB29F23ED7596DD1EC /* IDLCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB5C3625CC17585CC9CAB946 /* IDLCollectionViewCell.m */; };
 		BB5C3A0C66DEF6F3F41BF342 /* IDLKeyboardListener.m in Sources */ = {isa = PBXBuildFile; fileRef = BB5C33A7CD70BAF405FFD524 /* IDLKeyboardListener.m */; };
 		BB5C3A1FDED29D53D8339DBF /* UITextField+IDL_View.m in Sources */ = {isa = PBXBuildFile; fileRef = BB5C35B872D6A69E32F791F8 /* UITextField+IDL_View.m */; };
@@ -379,7 +380,9 @@
 		B3466C4187E343C8965C60D0 /* libPods-test.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-test.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB5C309E47BF6D4CD0C5C2F3 /* IDLCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDLCollectionViewFlowLayout.h; sourceTree = "<group>"; };
 		BB5C31E2587CC633ED10064B /* IDLCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDLCollectionViewFlowLayout.m; sourceTree = "<group>"; };
+		BB5C338E2B83166F7D905CAE /* IDLCollectionViewUniformFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDLCollectionViewUniformFlowLayout.h; sourceTree = "<group>"; };
 		BB5C33A7CD70BAF405FFD524 /* IDLKeyboardListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDLKeyboardListener.m; sourceTree = "<group>"; };
+		BB5C34B91F92CDB9E7B66A00 /* IDLCollectionViewUniformFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDLCollectionViewUniformFlowLayout.m; sourceTree = "<group>"; };
 		BB5C34D1EAB53B0C95427CB0 /* UITextField+IDL_View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+IDL_View.h"; sourceTree = "<group>"; };
 		BB5C35B872D6A69E32F791F8 /* UITextField+IDL_View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+IDL_View.m"; sourceTree = "<group>"; };
 		BB5C3625CC17585CC9CAB946 /* IDLCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDLCollectionViewCell.m; sourceTree = "<group>"; };
@@ -655,6 +658,8 @@
 				BB5C31E2587CC633ED10064B /* IDLCollectionViewFlowLayout.m */,
 				BB5C3ABB532AEAAFF8FB1A96 /* IDLKeyboardListener.h */,
 				BB5C33A7CD70BAF405FFD524 /* IDLKeyboardListener.m */,
+				BB5C338E2B83166F7D905CAE /* IDLCollectionViewUniformFlowLayout.h */,
+				BB5C34B91F92CDB9E7B66A00 /* IDLCollectionViewUniformFlowLayout.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -953,6 +958,7 @@
 				794BF827182C4FF300A6DF05 /* Frameworks */,
 				794BF828182C4FF300A6DF05 /* Resources */,
 				FFD041228F604A6DB1E553ED /* Copy Pods Resources */,
+				3209141B92125A40A07D6382 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -972,6 +978,7 @@
 				79642C141603C4E80095D5A2 /* Frameworks */,
 				79642C151603C4E80095D5A2 /* Resources */,
 				16A3F35118434304864F65B7 /* Copy Pods Resources */,
+				5318D11F088CEF190822498A /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1073,6 +1080,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-test/Pods-test-resources.sh\"\n";
+		};
+		3209141B92125A40A07D6382 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-test/Pods-test-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5318D11F088CEF190822498A /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-test/Pods-test-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 		68591BE15B6C48308F7AB629 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1215,6 +1252,7 @@
 				BB5C3F2F2E5B215C03BDEE9B /* IDLCollectionViewFlowLayout.m in Sources */,
 				BB5C3A1FDED29D53D8339DBF /* UITextField+IDL_View.m in Sources */,
 				BB5C3A0C66DEF6F3F41BF342 /* IDLKeyboardListener.m in Sources */,
+				BB5C31957586C1E2191B7666 /* IDLCollectionViewUniformFlowLayout.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
