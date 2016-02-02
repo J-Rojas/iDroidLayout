@@ -236,7 +236,7 @@
 }
 
 - (void)setFrame:(CGRect)frame {
-    if ([[IDLKeyboardListener shared] isVisible]) {
+    if ([[IDLKeyboardListener shared] isVisible] && _resizeOnKeyboard) {
         if (_keyboardFrame.size.height == 0) {
             [super setFrame:frame];
             [self adjustKeyboardFrame: nil];
