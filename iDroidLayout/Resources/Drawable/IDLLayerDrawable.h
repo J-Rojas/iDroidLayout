@@ -10,6 +10,10 @@
 
 @interface IDLLayerDrawable : IDLDrawable <IDLDrawableDelegate>
 
+- (IDLDrawable*) drawableAtIndex: (NSUInteger) index;
+
+@property (nonatomic, readonly) NSUInteger numberOfLayers;
+
 @end
 
 @interface IDLLayerDrawableConstantState : IDLDrawableConstantState

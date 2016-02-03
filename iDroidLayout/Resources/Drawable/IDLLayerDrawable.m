@@ -159,6 +159,17 @@
     return changed;
 }
 
+- (IDLDrawable*) drawableAtIndex: (NSUInteger) index {
+    IDLLayerDrawableConstantState *state = self.internalConstantState;
+    IDLLayerDrawableItem* item = state.items[index];
+    return item.drawable;
+}
+
+- (NSUInteger)numberOfLayers {
+    IDLLayerDrawableConstantState *state = self.internalConstantState;
+    return state.items.count;
+}
+
 - (void)drawInContext:(CGContextRef)context {
     for (IDLLayerDrawableItem *item in self.internalConstantState.items) {
         CGContextSaveGState(context);
