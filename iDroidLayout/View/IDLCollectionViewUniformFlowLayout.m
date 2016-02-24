@@ -11,6 +11,7 @@
     self = [super init];
 
     self.minimumInteritemSpacing = 0;
+    self.maximumInteritemSpacing = 0;
 
     return self;
 }
@@ -49,24 +50,23 @@
       eliminate the extra spacing by removing the delta between the actual spacing and the maximum spacing.
      */
 
-    NSIndexPath* ipPrev = [NSIndexPath indexPathForItem:indexPath.item - 1 inSection:indexPath.section];
-    CGRect fPrev = [super layoutAttributesForItemAtIndexPath:ipPrev].frame;
-    CGFloat rightPrev = indexPath.item * fPrev.size.width;
-    CGFloat spacingValue = fmaxf(fminf(atts.frame.origin.x - rightPrev, self.maximumInteritemSpacing), self.minimumInteritemSpacing);
+    CGFloat spacingValue = self.maximumInteritemSpacing;
 
-    //adjust the rightPrev based on previous spacing
-    rightPrev += spacingValue * indexPath.item;
-
-    //handle maximum interitem spacing
-    if (atts.frame.origin.x <= rightPrev) //the current applied spacing is within range
-        return atts;
-
-    CGRect f = atts.frame;
-    f.origin.x = rightPrev;
-    atts.frame = f;
+    CGRect rect;
+    rect.size = atts.frame.size;
+    rect.origin.x = indexPath.item * (atts.frame.size.width + spacingValue);
+    rect.origin.y = 0;
+    atts.frame = rect;
 
     return atts;
 
+}
+
+- (CGSize)collectionViewContentSize {
+    //content size is the number of cells + the interitem spacing
+    CGSize size = [super collectionViewContentSize];
+    size.width -= ([self.collectionView numberOfItemsInSection:0] - 1) * 10;
+    return size;
 }
 
 @end

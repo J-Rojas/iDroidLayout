@@ -72,4 +72,12 @@
     return atts;
 }
 
+- (CGSize)collectionViewContentSize {
+    //content size is the number of cells + the interitem spacing
+    CGSize size = [super collectionViewContentSize];
+    NSLog(@"collectionViewContentSize: orig width %f, new width %f", size.width, size.width - ([self.collectionView numberOfItemsInSection:0] - 1) * 10);
+    size.width -= ([self.collectionView numberOfItemsInSection:0] - 1) * 10;
+    return size;
+}
+
 @end
