@@ -190,7 +190,7 @@ BOOL IDLGradientDrawableCornerRadiusEqualsCornerRadius(IDLGradientDrawableCorner
             CGContextMoveToPoint(context, rect.origin.x, rect.origin.y + corners.topLeft);
             CGContextAddLineToPoint(context, rect.origin.x, rect.origin.y + rect.size.height - corners.bottomLeft);
             if (corners.bottomLeft > 0) {
-                CGContextAddArc(context, rect.origin.x + corners.bottomLeft, rect.origin.y + rect.size.height - corners.bottomLeft, corners.bottomLeft, M_PI / 4, M_PI / 2, true);
+                CGContextAddArc(context, rect.origin.x + corners.bottomLeft, rect.origin.y + rect.size.height - corners.bottomLeft, corners.bottomLeft, M_PI, M_PI / 2, true);
             }
             CGContextAddLineToPoint(context, rect.origin.x + rect.size.width - corners.bottomRight, rect.origin.y + rect.size.height);
             if (corners.bottomRight > 0) {
