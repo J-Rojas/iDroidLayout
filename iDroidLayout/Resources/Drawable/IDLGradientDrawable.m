@@ -43,6 +43,43 @@ BOOL IDLGradientDrawableCornerRadiusEqualsCornerRadius(IDLGradientDrawableCorner
     return r1.topLeft == r2.topLeft && r1.topRight == r2.topRight && r1.bottomLeft == r2.bottomLeft && r1.bottomRight == r2.bottomRight;
 }
 
+
+
+CGPoint IDLGradientOriginPointFromAngle(CGPoint origin, CGSize size, CGFloat angle) {
+    CGPoint retval = origin;
+
+    switch ((NSInteger)angle) {
+        case 90:
+            retval = CGPointMake(origin.x, origin.y + size.height);
+            break;
+        case 180:
+            retval = CGPointMake(origin.x + size.width, origin.y);
+            break;
+        case 270:
+            break;
+    }
+    return retval;
+}
+
+CGPoint IDLGradientDestinationPointFromAngle(CGPoint origin, CGSize size, CGFloat angle) {
+    CGPoint retval = origin;
+
+    switch ((NSInteger)angle) {
+        case 0:
+            retval = CGPointMake(origin.x + size.width, origin.y);
+            break;
+        case 90:
+        case 180:
+            retval = CGPointMake(origin.x, origin.y);
+            break;
+        case 270:
+            retval = CGPointMake(origin.x, origin.y + size.height);
+            break;
+    }
+
+    return retval;
+}
+
 @interface IDLGradientDrawableConstantState ()
 
 @property (nonatomic, strong) NSArray *colors;
@@ -54,6 +91,7 @@ BOOL IDLGradientDrawableCornerRadiusEqualsCornerRadius(IDLGradientDrawableCorner
 @property (nonatomic, strong) UIColor *strokeColor;
 @property (nonatomic, assign) CGFloat dashWidth;
 @property (nonatomic, assign) CGFloat dashGap;
+@property (nonatomic, assign) CGFloat angle;
 
 @property (nonatomic, assign) CGFloat innerRadius;
 @property (nonatomic, assign) CGFloat innerRadiusRatio;
@@ -111,6 +149,7 @@ BOOL IDLGradientDrawableCornerRadiusEqualsCornerRadius(IDLGradientDrawableCorner
             self.strokeColor = state.strokeColor;
             self.dashWidth = state.dashWidth;
             self.dashGap = state.dashGap;
+            self.angle = state.angle;
             
             self.innerRadius = state.innerRadius;
             self.innerRadiusRatio = state.innerRadiusRatio;
@@ -148,6 +187,15 @@ BOOL IDLGradientDrawableCornerRadiusEqualsCornerRadius(IDLGradientDrawableCorner
         _cgColors = cgColors;
     }
     return _cgColors;
+}
+
+- (void)setColors:(NSArray *)colors {
+    if (_gradient != NULL) {
+        CGGradientRelease(_gradient);
+        _gradient = NULL;
+    }
+    _cgColors = nil;
+    _colors = colors;
 }
 
 - (CGGradientRef)currentGradient {
@@ -237,7 +285,7 @@ BOOL IDLGradientDrawableCornerRadiusEqualsCornerRadius(IDLGradientDrawableCorner
 - (void)drawInContext:(CGContextRef)context {
     CGRect rect = self.bounds;
     IDLGradientDrawableConstantState *state = self.internalConstantState;
-    NSArray* colors = self.colors ? self.colors : state.colors;
+    NSArray* colors = state.colors;
     if (state.shape != IDLGradientDrawableShapeLine) {
         if ([colors count] == 1) {
             [self createPathInContext:context forRect:rect];
@@ -250,7 +298,10 @@ BOOL IDLGradientDrawableCornerRadiusEqualsCornerRadius(IDLGradientDrawableCorner
             
             if (state.gradientType == IDLGradientDrawableGradientTypeLinear) {
                 CGGradientRef gradient = [state currentGradient];
-                CGContextDrawLinearGradient(context, gradient, rect.origin, CGPointMake(rect.origin.x + rect.size.width, rect.origin.y), 0);
+                CGContextDrawLinearGradient(context, gradient,
+                        IDLGradientOriginPointFromAngle(rect.origin, rect.size, state.angle),
+                        IDLGradientDestinationPointFromAngle(rect.origin, rect.size, state.angle),
+                        0);
             } else if (state.gradientType == IDLGradientDrawableGradientTypeRadial) {
                 CGGradientRef gradient = [state currentGradient];
                 CGPoint relativeCenterPoint = state.relativeGradientCenter;
@@ -318,7 +369,8 @@ BOOL IDLGradientDrawableCornerRadiusEqualsCornerRadius(IDLGradientDrawableCorner
     NSMutableDictionary *attrs = [TBXML attributesFromXMLElement:element reuseDictionary:nil];
     NSString *shape = attrs[@"shape"];
     state.shape = IDLGradientDrawableShapeFromString(shape);
-    
+    state.size = CGSizeMake(-1, -1);
+
     if (state.shape == IDLGradientDrawableShapeRing) {
         state.innerRadius = [attrs dimensionFromIDLValueForKey:@"innerRadius" defaultValue:-1];
         if (state.innerRadius == -1) {
@@ -383,7 +435,17 @@ BOOL IDLGradientDrawableCornerRadiusEqualsCornerRadius(IDLGradientDrawableCorner
                 state.colors = @[startColor?startColor:[UIColor blackColor], endColor?endColor:[UIColor blackColor]];
             }
 
-            
+            state.angle = [attrs stringFromIDLValueForKey:@"angle"].floatValue;
+
+            //normalize angle
+            while (state.angle < 0) {
+                state.angle += 360;
+            }
+
+            while (state.angle >= 360) {
+                state.angle -= 360;
+            }
+
         } else if ([name isEqualToString:@"padding"]) {
             attrs = [TBXML attributesFromXMLElement:child reuseDictionary:attrs];
             UIEdgeInsets padding = UIEdgeInsetsZero;
@@ -446,6 +508,28 @@ BOOL IDLGradientDrawableCornerRadiusEqualsCornerRadius(IDLGradientDrawableCorner
 
 - (IDLDrawableConstantState *)constantState {
     return self.internalConstantState;
+}
+
+- (void)setColors:(NSArray *)colors {
+    self.internalConstantState.colors = colors;
+
+}
+
+- (NSArray*) colors {
+    return self.internalConstantState.colors;
+}
+
+- (CGRect)bounds {
+
+    CGRect bounds = [super bounds];
+
+    IDLGradientDrawableConstantState* state = self.internalConstantState;
+    if (state.size.width != -1)
+        bounds.size.width = state.size.width;
+    if (state.size.height != -1)
+        bounds.size.height = state.size.height;
+
+    return bounds;
 }
 
 @end
