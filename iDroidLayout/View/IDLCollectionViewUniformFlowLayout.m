@@ -62,14 +62,4 @@
 
 }
 
-- (CGSize)collectionViewContentSize {
-    //content size is the number of cells + the interitem spacing
-    CGSize size = [super collectionViewContentSize];
-    if (self.maximumInteritemSpacing > 0)
-        size.width += ([self.collectionView numberOfItemsInSection:0] - 1) * (-10 + self.maximumInteritemSpacing);
-    else
-        size.width += ([self.collectionView numberOfItemsInSection:0] - 1) * MIN(-10, self.maximumInteritemSpacing);
-    return size;
-}
-
 @end
