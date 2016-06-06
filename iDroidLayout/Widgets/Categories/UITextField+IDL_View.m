@@ -8,7 +8,9 @@
 #import "IDLResourceManager+Core.h"
 #import "IDLResourceManager+String.h"
 #import "NSDictionary+IDL_ResourceManager.h"
+#import <objc/runtime.h>
 
+static const char* kIDLUITextFieldColorStateList = "IDLUITextFieldColorStateList";
 
 @implementation UITextField (IDL_View)
 
@@ -33,6 +35,7 @@
     IDLColorStateList *textColorStateList = [attrs colorStateListFromIDLValueForKey:@"textColor"];
     if (textColorStateList != nil) {
         self.textColor = [textColorStateList colorForControlState:UIControlStateNormal];
+        [self setTextColorList:textColorStateList];
     } else {
         UIColor *color = [attrs colorFromIDLValueForKey:@"textColor"];
         if (color != nil) {
@@ -98,6 +101,14 @@
     } else {
         self.textAlignment = NSTextAlignmentCenter;
     }
+}
+
+- (void) setTextColorList: (IDLColorStateList *) list {
+    objc_setAssociatedObject(self, kIDLUITextFieldColorStateList, list, OBJC_ASSOCIATION_RETAIN);
+}
+
+- (IDLColorStateList *) textColorList {
+    return objc_getAssociatedObject(self, kIDLUITextFieldColorStateList);
 }
 
 @end

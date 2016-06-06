@@ -9,6 +9,8 @@
 #import "IDLEditText.h"
 #import "UIView+IDL_Layout.h"
 #import "Categories/UITextField+IDL_View.h"
+#import "IDLResourceStateList+IDL_Internal.h"
+#import "IDLColorStateList.h"
 
 @implementation IDLEditText
 
@@ -145,6 +147,28 @@
 - (void)setFont:(UIFont *)font {
     [super setFont:font];
     [self requestLayout];
+}
+
+- (void) updateTextColor {
+    IDLColorStateList* colorStateList = self.textColorList;
+    if (colorStateList) {
+        self.textColor = [colorStateList colorForControlState:self.state];
+    }
+}
+
+- (void)setEnabled:(BOOL)enabled {
+    [super setEnabled:enabled];
+    [self updateTextColor];
+}
+
+- (void)setHighlighted:(BOOL)highlighted {
+    [super setHighlighted:highlighted];
+    [self updateTextColor];
+}
+
+- (void)setSelected:(BOOL)selected {
+    [super setSelected:selected];
+    [self updateTextColor];
 }
 
 @end

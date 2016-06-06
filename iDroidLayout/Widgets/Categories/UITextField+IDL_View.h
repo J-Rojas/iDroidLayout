@@ -5,8 +5,12 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UITextField.h>
 
+@class IDLColorStateList;
+
 @interface UITextField (IDL_View)
 
 - (void)setInputType: (NSString*) inputType;
+
+@property (nonatomic, readwrite, strong) IDLColorStateList * textColorList;
 
 @end
