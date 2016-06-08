@@ -54,7 +54,10 @@
         NSString *widthAttr = attrs[@"layout_width"];
         NSString *heightAttr = attrs[@"layout_height"];
         if (widthAttr == nil || heightAttr == nil) {
-            NSLog(@"You have to set the layout_width and laypit_height parameters.");
+            NSString *layoutAttr = attrs[@"layout"];
+            if (layoutAttr == nil) {
+                NSLog(@"You have to set the layout_width and layout_height parameters.");
+            }
             return nil;
         }
         _width = [IDLLayoutParams sizeForLayoutSizeAttribute:widthAttr];
