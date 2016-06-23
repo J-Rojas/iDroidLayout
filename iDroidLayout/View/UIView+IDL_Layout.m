@@ -412,7 +412,8 @@ static char visibilityKey;
     CGRect oldFrame = self.frame;
     CGRect newFrame = [self roundFrame:frame];
     BOOL changed = !CGRectEqualToRect(oldFrame, newFrame);
-    if (changed) {
+    // TODO: [#121971633] toggling hot spot banner causes final IDLTableViewCell to be measured incorrectly, this is just a temporary safeguard
+    if (changed && (newFrame.size.width != 0 || ![self isKindOfClass:[UITableViewCell class]])) {
         self.frame = newFrame;
     }
     

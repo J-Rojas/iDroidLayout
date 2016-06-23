@@ -231,7 +231,11 @@ static char matchParentChildrenKey;
             maxY = MAX(maxY, childTop + height);
         }
     }
-    self.contentSize = CGSizeMake(maxX + padding.right, maxY + padding.bottom);
+    CGSize newContentSize = CGSizeMake(maxX + padding.right, maxY + padding.bottom);
+    // TODO: [#122093121] [#122088105] enabling/toggling hot spot banner causes UIScrollView to be measured and offset incorrectly, this is just a temporary safeguard
+    if (newContentSize.width != 0) {
+        self.contentSize = newContentSize;
+    }
 }
 
 - (void)measureChild:(UIView *)child withParentWidthMeasureSpec:(IDLLayoutMeasureSpec)parentWidthMeasureSpec parentHeightMeasureSpec:(IDLLayoutMeasureSpec)parentHeightMeasureSpec {
