@@ -231,7 +231,7 @@ static char matchParentChildrenKey;
             maxY = MAX(maxY, childTop + height);
         }
     }
-    self.contentSize = CGSizeMake(maxX + padding.right, maxY + padding.bottom);
+    self.contentSize = CGSizeMake([self.subviews count] * (maxX + padding.right), maxY + padding.bottom);
 }
 
 - (void)measureChild:(UIView *)child withParentWidthMeasureSpec:(IDLLayoutMeasureSpec)parentWidthMeasureSpec parentHeightMeasureSpec:(IDLLayoutMeasureSpec)parentHeightMeasureSpec {
