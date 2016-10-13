@@ -67,7 +67,7 @@ static char matchParentChildrenKey;
 }
 
 - (void)onMeasureWithWidthMeasureSpec:(IDLLayoutMeasureSpec)widthMeasureSpec heightMeasureSpec:(IDLLayoutMeasureSpec)heightMeasureSpec {
-    NSInteger count = MIN(1, [self.subviews count]);
+    NSInteger count = [self.subviews count];
     
     BOOL measureMatchParentChildren = widthMeasureSpec.mode != IDLLayoutMeasureSpecModeExactly || heightMeasureSpec.mode != IDLLayoutMeasureSpecModeExactly;
     NSMutableArray *matchParentChildren = self.matchParentChildren;
@@ -168,7 +168,7 @@ static char matchParentChildrenKey;
 }
 
 - (void)onLayoutWithFrame:(CGRect)frame didFrameChange:(BOOL)changed {
-    NSInteger count = MIN(1, [self.subviews count]);
+    NSInteger count = [self.subviews count];
     
     UIEdgeInsets padding = self.padding;
     CGFloat parentLeft = padding.left;
