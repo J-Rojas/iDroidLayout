@@ -256,16 +256,29 @@ static char matchParentChildrenKey;
     if ([NSStringFromClass([child class]) isEqualToString:@"UIWebDocumentView"]) {
         return;
     }
+
+    IDLLayoutMeasureSpec scrollWidthMeasureSpec, scrollHeightMeasureSpec;
+    scrollWidthMeasureSpec.mode = IDLLayoutMeasureSpecModeUnspecified;
+    scrollWidthMeasureSpec.size = parentWidthMeasureSpec.size;
+    scrollHeightMeasureSpec.mode = IDLLayoutMeasureSpecModeUnspecified;
+    scrollHeightMeasureSpec.size = parentHeightMeasureSpec.size;
+
     IDLMarginLayoutParams *lp = (IDLMarginLayoutParams *)child.layoutParams;
     UIEdgeInsets lpMargin = lp.margin;
     UIEdgeInsets padding = self.padding;
-    IDLLayoutMeasureSpec childWidthMeasureSpec = [self childMeasureSpecWithMeasureSpec:parentWidthMeasureSpec padding:(padding.left + padding.right + lpMargin.left + lpMargin.right + widthUsed) childDimension:lp.width];
-    IDLLayoutMeasureSpec childHeightMeasureSpec;
-    childHeightMeasureSpec.size = lpMargin.top + lpMargin.bottom + parentHeightMeasureSpec.size;
 
-    //JLR - Changed from Unspecified to Exactly to fix layout problem with children that uses layout_weight.
-    childHeightMeasureSpec.mode = IDLLayoutMeasureSpecModeExactly;
-    
+    //For wrap_content children, the size of the boundary can be larger
+    if (lp.width == IDLLayoutParamsSizeMatchParent) {
+        scrollWidthMeasureSpec.size = parentWidthMeasureSpec.size;
+        scrollWidthMeasureSpec.mode = IDLLayoutMeasureSpecModeExactly;
+    }
+    if (lp.height == IDLLayoutParamsSizeMatchParent) {
+        scrollHeightMeasureSpec.size = parentHeightMeasureSpec.size;
+        scrollHeightMeasureSpec.mode = IDLLayoutMeasureSpecModeExactly;
+    }
+
+    IDLLayoutMeasureSpec childWidthMeasureSpec = [self childMeasureSpecWithMeasureSpec:scrollWidthMeasureSpec padding:(padding.left + padding.right + lpMargin.left + lpMargin.right + widthUsed) childDimension:lp.width];
+    IDLLayoutMeasureSpec childHeightMeasureSpec = [self childMeasureSpecWithMeasureSpec:scrollHeightMeasureSpec padding:(padding.top + padding.bottom + lpMargin.top + lpMargin.bottom + heightUsed) childDimension:lp.height];
     [child measureWithWidthMeasureSpec:childWidthMeasureSpec heightMeasureSpec:childHeightMeasureSpec];
 }
 

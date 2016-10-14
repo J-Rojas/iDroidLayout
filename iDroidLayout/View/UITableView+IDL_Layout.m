@@ -30,4 +30,8 @@ THE SOFTWARE.
     //Table should not use IDL layout - it manages its own layout mechanism
 }
 
+- (void)onLayoutWithFrame:(CGRect)frame didFrameChange:(BOOL)changed {
+    //Table should not use IDL layout - it manages its own layout mechanism
+}
+
 @end
