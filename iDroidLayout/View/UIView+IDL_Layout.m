@@ -64,22 +64,21 @@ static char visibilityKey;
     // visibility
     NSString *visibilityString = attrs[@"visibility"];
     self.visibility = IDLViewVisibilityFromString(visibilityString);
+    
+    // background
+    /*UIColor *background = [attrs colorFromIDLValueForKey:@"background"];
+    if (background != nil) {
+        self.backgroundColor = background;
+    }*/
 
     //clickable
     NSString* clickable = attrs[@"clickable"];
     if (clickable != nil)
         self.userInteractionEnabled = [clickable isEqualToString:@"true"];
 
-    // background
     NSString *backgroundString = attrs[@"background"];
-    UIColor* background = nil;
-    if (backgroundString) {
-        background = [attrs colorFromIDLValueForKey:@"background"];
-        if (background != nil) {
-            self.backgroundColor = background;
-        } else {
-            self.backgroundDrawable = [[IDLResourceManager currentResourceManager] drawableForIdentifier:backgroundString];
-        }
+    if (backgroundString != nil) {
+        self.backgroundDrawable = [[IDLResourceManager currentResourceManager] drawableForIdentifier:backgroundString];
     }
 
     NSString *onClickAction = attrs[@"onClick"];

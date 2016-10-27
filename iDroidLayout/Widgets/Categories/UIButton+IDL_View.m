@@ -16,6 +16,13 @@
 @implementation UIButton (Layout)
 
 - (void)setupFromAttributes:(NSDictionary *)attrs {
+    /*NSString *backgroundString = [attrs objectForKey:@"background"];
+    if (backgroundString != nil) {
+        NSMutableDictionary *mutableAttrs = [NSMutableDictionary dictionaryWithDictionary:attrs];
+        [mutableAttrs removeObjectForKey:@"background"];
+        attrs = mutableAttrs;
+    }*/
+    
     [super setupFromAttributes:attrs];
     NSString *text = attrs[@"text"];
     if ([[IDLResourceManager currentResourceManager] isValidIdentifier:text]) {
