@@ -167,7 +167,7 @@ static IDLResourceManager *currentResourceManager;
     if (identifier != nil) {
         if (identifier.type == IDLResourceTypeDrawable) {
             UIImage *image = [self imageForIdentifier:identifierString];
-            if (image != nil) {
+            if ([image isKindOfClass:[UIImage class]]) {
                 ret = [UIColor colorWithPatternImage:image];
             }
         } else if (identifier.type == IDLResourceTypeColor) {

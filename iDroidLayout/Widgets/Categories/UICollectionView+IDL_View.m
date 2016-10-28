@@ -11,8 +11,10 @@
 @implementation UICollectionView (IDL_View)
 
 - (instancetype)initWithAttributes:(NSDictionary *)attrs {
-    [self setupFromAttributes:attrs];
     self = [self initWithFrame:self.frame collectionViewLayout:[IDLCollectionViewFlowLayout new]];
+    //setup must occur after initWithFrame otherwise backgroundColor loaded via IDL attributes will be disregarded
+    //since it is initialized/overwritten in initWithFrame
+    [self setupFromAttributes:attrs];
     return self;
 }
 
