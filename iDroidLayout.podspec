@@ -16,7 +16,7 @@ In Android layouts can be defined in XML. Views automatically adjust their size 
 
   s.author        = { "Tom Quist" => "tom@quist.de" }
 
-  s.platform      = :ios, "6.0"
+  s.platform      = :ios, "7.0"
   s.source        = { :git => "https://github.com/tomquist/iDroidLayout.git", :tag => "#{s.version}" }
   s.source_files  = 'iDroidLayout', 'iDroidLayout/**/*.{h,m}'
   s.framework     = 'QuartzCore', 'UIKit', 'CoreGraphics'
