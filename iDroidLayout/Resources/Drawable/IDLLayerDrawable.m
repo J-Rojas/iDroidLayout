@@ -8,7 +8,6 @@
 
 #import "IDLLayerDrawable.h"
 #import "IDLDrawable+IDL_Internal.h"
-#import "IDLResourceManager.h"
 #import "TBXML+IDL.h"
 
 @interface IDLLayerDrawableItem : NSObject
@@ -65,7 +64,7 @@
     return self;
 }
 
-- (void)addLayer:(IDLDrawable *)drawable insets:(UIEdgeInsets)insets owner:(IDLLayerDrawable *)owner {
+- (void)addLayer:(IDLDrawable *)drawable insets:(UIEdgeInsets)insets owner:(IDLLayerDrawable *)owner __unused{
     IDLLayerDrawableItem *item = [[IDLLayerDrawableItem alloc] init];
     item.drawable = drawable;
     item.insets = insets;
@@ -119,12 +118,14 @@
 
 @implementation IDLLayerDrawable
 
-
 - (instancetype)initWithState:(IDLLayerDrawableConstantState *)state {
     self = [super init];
     if (self) {
         IDLLayerDrawableConstantState *s = [[IDLLayerDrawableConstantState alloc] initWithState:state owner:self];
         self.internalConstantState = s;
+
+        CGSize intrinsicSize = self.intrinsicSize;
+        self.bounds = CGRectMake(0,0,intrinsicSize.width, intrinsicSize.height);
     }
     return self;
 }
@@ -143,7 +144,9 @@
 - (void)onBoundsChangeToRect:(CGRect)bounds {
     [super onBoundsChangeToRect:bounds];
     for (IDLLayerDrawableItem *item in self.internalConstantState.items) {
-        CGRect insetRect = UIEdgeInsetsInsetRect(bounds, item.insets);
+        //only alter the size, not the origin
+        CGRect rect = { CGPointMake(0,0), bounds.size };
+        CGRect insetRect = UIEdgeInsetsInsetRect(rect, item.insets);
         item.drawable.bounds = insetRect;
     }
 }
@@ -173,7 +176,7 @@
 - (void)drawInContext:(CGContextRef)context {
     for (IDLLayerDrawableItem *item in self.internalConstantState.items) {
         CGContextSaveGState(context);
-        [item.drawable drawInContext:context];
+        [item.drawable drawInContext:context withRect:self.bounds];
         CGContextRestoreGState(context);
     }
     OUTLINE_RECT(context, self.bounds);

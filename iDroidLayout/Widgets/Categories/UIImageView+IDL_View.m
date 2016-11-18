@@ -6,16 +6,18 @@
 //  Copyright (c) 2012 Tom Quist. All rights reserved.
 //
 
-#import "UIImageView+IDL_View.h"
 #import "UIView+IDL_Layout.h"
+#import "UIColor+IDL_ColorParser.h"
 #import "IDLResourceManager.h"
 
 @implementation UIImageView (Layout)
 
 - (void)setupFromAttributes:(NSDictionary *)attrs {
     [super setupFromAttributes:attrs];
+
+    IDLResourceManager * resMgr = [IDLResourceManager currentResourceManager];
     NSString *imageRes = attrs[@"src"];
-    IDLDrawableStateList *drawableStateList = [[IDLResourceManager currentResourceManager] drawableStateListForIdentifier:imageRes];
+    IDLDrawableStateList *drawableStateList = [resMgr drawableStateListForIdentifier:imageRes];
     if (drawableStateList != nil) {
         self.image = [drawableStateList imageForControlState:UIControlStateNormal];
         UIImage *highlightedImage = [drawableStateList imageForControlState:UIControlStateHighlighted];
@@ -51,6 +53,15 @@
             self.contentMode = UIViewContentModeBottomLeft;
         } else if ([scaleType isEqualToString:@"bottomRight"]) {
             self.contentMode = UIViewContentModeBottomRight;
+        }
+    }
+
+    NSString *colorRes = attrs[@"tintColor"];
+    if (colorRes) {
+        if ([resMgr isValidIdentifier:colorRes]) {
+            self.tintColor = [resMgr colorForIdentifier:colorRes];
+        } else {
+            self.tintColor = [UIColor colorFromIDLColorString:colorRes];
         }
     }
 }

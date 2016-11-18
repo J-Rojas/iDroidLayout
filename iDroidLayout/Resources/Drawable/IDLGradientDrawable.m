@@ -200,7 +200,7 @@ CGPoint IDLGradientDestinationPointFromAngle(CGPoint origin, CGSize size, CGFloa
 
 - (CGGradientRef)currentGradient {
     if (_gradient == NULL) {
-        _gradient = CGGradientCreateWithColors(self.colorSpace, (CFArrayRef)self.cgColors, _colorPositions);
+        _gradient = CGGradientCreateWithColors(self.colorSpace, (__bridge CFArrayRef)self.cgColors, _colorPositions);
     }
     return _gradient;
 }
@@ -282,8 +282,8 @@ CGPoint IDLGradientDestinationPointFromAngle(CGPoint origin, CGSize size, CGFloa
     }
 }
 
-- (void)drawInContext:(CGContextRef)context {
-    CGRect rect = self.bounds;
+- (void)drawInContext:(CGContextRef)context withRect:(CGRect) parentRect {
+    CGRect rect = {parentRect.origin, self.bounds.size};
     IDLGradientDrawableConstantState *state = self.internalConstantState;
     NSArray* colors = state.colors;
     if (state.shape != IDLGradientDrawableShapeLine) {
