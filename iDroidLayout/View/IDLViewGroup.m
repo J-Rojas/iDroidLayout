@@ -132,15 +132,4 @@
     [super layoutSubviews];
 }
 
-- (void) measureAndLayout {
-    IDLLayoutMeasureSpec widthMeasureSpec;
-    IDLLayoutMeasureSpec heightMeasureSpec;
-    widthMeasureSpec.size = self.frame.size.width;
-    heightMeasureSpec.size = self.frame.size.height;
-    widthMeasureSpec.mode = IDLLayoutMeasureSpecModeExactly;
-    heightMeasureSpec.mode = IDLLayoutMeasureSpecModeExactly;
-    [self measureWithWidthMeasureSpec:widthMeasureSpec heightMeasureSpec:heightMeasureSpec];
-    [self layoutWithFrame:self.frame];
-}
-
 @end
