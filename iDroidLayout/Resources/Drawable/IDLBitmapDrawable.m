@@ -6,11 +6,13 @@
 //  Copyright (c) 2012 Tom Quist. All rights reserved.
 //
 
+#import "IDLResourceManager.h"
 #import "IDLBitmapDrawable.h"
 #import "IDLDrawable+IDL_Internal.h"
 #import "TBXML+IDL.h"
-#import "IDLResourceManager.h"
 #import "UIImage+IDLNinePatch.h"
+#import "UIColor+IDL_ColorParser.h"
+#import "UIImage+IDL_FromColor.h"
 
 @interface IDLBitmapDrawableConstantState ()
 
@@ -70,6 +72,8 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveMemoryWarning) name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
         IDLBitmapDrawableConstantState *s = [[IDLBitmapDrawableConstantState alloc] initWithState:state];
         self.internalConstantState = s;
+        CGSize intrisicSize = self.intrinsicSize;
+        self.bounds = CGRectMake(self.bounds.origin.x, self.bounds.origin.y, intrisicSize.width, intrisicSize.height);
     }
     return self;
 }
@@ -134,12 +138,12 @@
 }
 
 - (void)inflateWithElement:(TBXMLElement *)element {
+    IDLResourceManager *resMgr = [IDLResourceManager currentResourceManager];
     IDLBitmapDrawableConstantState *state = self.internalConstantState;
     [super inflateWithElement:element];
     NSMutableDictionary *dictionary = [TBXML attributesFromXMLElement:element reuseDictionary:nil];
     NSString *bitmapIdentifier = dictionary[@"src"];
     if (bitmapIdentifier != nil) {
-        IDLResourceManager *resMgr = [IDLResourceManager currentResourceManager];
         UIImage *image = [resMgr imageForIdentifier:bitmapIdentifier];
         state.image = image;
     } else {
@@ -149,6 +153,29 @@
     NSString *gravityValue = dictionary[@"gravity"];
     if (gravityValue != nil) {
         state.gravity = [IDLGravity gravityFromAttribute:gravityValue];
+    }
+
+    NSString *renderingMode = dictionary[@"renderingMode"];
+    if (renderingMode != nil) {
+        if ([renderingMode isEqualToString:@"template"]) {
+            state.image = [state.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        } else if ([renderingMode isEqualToString:@"tint"]) {
+
+            NSString *tintColorRes = dictionary[@"tintColor"];
+            UIColor* tintColor = nil;
+            if (tintColorRes) {
+                if ([resMgr isValidIdentifier:tintColorRes]) {
+                    tintColor = [resMgr colorForIdentifier:tintColorRes];
+                } else {
+                    tintColor = [UIColor colorFromIDLColorString:tintColorRes];
+                }
+            }
+
+            if (tintColor) {
+                state.image = [UIImage idl_image:state.image withTintColor:tintColor];
+            } else
+                NSLog(@"renderingMode 'tint' requires a valid 'tintColor' attribute");
+        }
     }
 }
 

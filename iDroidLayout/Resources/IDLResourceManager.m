@@ -15,6 +15,7 @@
 #import "IDLXMLCache.h"
 #import "IDLColorStateList.h"
 #import "UIColor+IDL_ColorParser.h"
+#import "IDLBitmapDrawable.h"
 
 
 @interface IDLResourceManager ()
@@ -135,7 +136,7 @@ static IDLResourceManager *currentResourceManager;
 }
 
 - (UIImage *)imageForIdentifier:(NSString *)identifierString withCaching:(BOOL)withCaching {
-    UIImage *ret = nil;
+    id ret = nil;
     IDLResourceIdentifier *identifier = [self resourceIdentifierForString:identifierString];
     if (identifier.type == IDLResourceTypeColor) {
         UIColor *color = [self colorForIdentifier:identifierString];
@@ -151,6 +152,11 @@ static IDLResourceManager *currentResourceManager;
         if (withCaching && ret != nil) {
             identifier.cachedObject = ret;
         }
+
+        if ([ret isKindOfClass:[IDLBitmapDrawable class]]) {
+            ret = ((IDLBitmapDrawable *) ret).image;
+        }
+
     } else {
         NSLog(@"Could not create image from resource identifier %@: Invalid resource type", identifierString);
     }

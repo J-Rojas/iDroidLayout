@@ -382,6 +382,18 @@ static char visibilityKey;
     return CGSizeMake(size.width.size, size.height.size);
 }
 
+- (void) measureAndLayout {
+    IDLLayoutMeasureSpec widthMeasureSpec;
+    IDLLayoutMeasureSpec heightMeasureSpec;
+    widthMeasureSpec.size = self.frame.size.width;
+    heightMeasureSpec.size = self.frame.size.height;
+    widthMeasureSpec.mode = IDLLayoutMeasureSpecModeUnspecified;
+    heightMeasureSpec.mode = IDLLayoutMeasureSpecModeUnspecified;
+    [self measureWithWidthMeasureSpec:widthMeasureSpec heightMeasureSpec:heightMeasureSpec];
+    CGRect frame = {self.frame.origin, self.measuredSize};
+    [self layoutWithFrame:frame];
+}
+
 - (void)onMeasureWithWidthMeasureSpec:(IDLLayoutMeasureSpec)widthMeasureSpec heightMeasureSpec:(IDLLayoutMeasureSpec)heightMeasureSpec {
     CGSize minSize = [self suggestedMinimumSize];
     IDLLayoutMeasuredSize size;

@@ -11,6 +11,7 @@
 #import "IDLResourceManager.h"
 #import "UIColor+IDL_ColorParser.h"
 #import "UIImage+IDL_FromColor.h"
+#import "IDLBitmapDrawable.h"
 
 @interface IDLDrawableStateItem ()
 
@@ -32,7 +33,12 @@
 - (UIImage *)image {
     UIImage *ret = nil;
     if ([[IDLResourceManager currentResourceManager] isValidIdentifier:self.resourceIdentifier]) {
-        ret = [[IDLResourceManager currentResourceManager] imageForIdentifier:self.resourceIdentifier];
+        IDLDrawable * drawable = [[IDLResourceManager currentResourceManager] drawableForIdentifier:self.resourceIdentifier];
+        if ([drawable isKindOfClass:[IDLBitmapDrawable class]]) {
+            ret = ((IDLBitmapDrawable *) drawable).image;
+        } else {
+            ret = [drawable renderToImage];
+        }
     } else {
         // Try to parse color string
         UIColor *color = [UIColor colorFromIDLColorString:self.resourceIdentifier];

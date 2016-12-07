@@ -11,5 +11,6 @@
 @interface UIImage (IDL_FromColor)
 
 + (UIImage *)idl_imageFromColor:(UIColor *)color withSize:(CGSize)size;
++ (UIImage *)idl_image:(UIImage*) image withTintColor:(UIColor *)color;
 
 @end
