@@ -28,6 +28,14 @@ THE SOFTWARE.
 
 - (void)requestLayout {
     //Table should not use IDL layout - it manages its own layout mechanism
+
+    //UITableViewWrapperView is the first object and its background is typically white. This prevents viewing changes to the table view's
+    //background color so set its color to transparent
+
+    UIView* view = self.subviews.firstObject;
+    if (![view isKindOfClass:[UITableViewCell class]]) {
+        view.backgroundColor = [UIColor clearColor];
+    }
 }
 
 - (void)onLayoutWithFrame:(CGRect)frame didFrameChange:(BOOL)changed {

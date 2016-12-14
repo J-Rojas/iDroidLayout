@@ -289,10 +289,10 @@
     UIEdgeInsets padding = self.padding;
     IDLLayoutMeasureSpec childWidthMeasureSpec = [self childMeasureSpecForChildStart:params.left childEnd:params.right childSize:params.width startMargin:paramsMargin.left endMargin:paramsMargin.right startPadding:padding.left endPadding:padding.right mySize:myWidth];
     IDLLayoutMeasureSpec childHeightMeasureSpec;
-    if (params.width == IDLLayoutParamsSizeMatchParent) {
+    if (params.height == IDLLayoutParamsSizeMatchParent) {
         childHeightMeasureSpec = IDLLayoutMeasureSpecMake(myHeight - padding.top - padding.bottom, IDLLayoutMeasureSpecModeExactly);
     } else {
-        childHeightMeasureSpec = IDLLayoutMeasureSpecMake(myHeight - padding.top - padding.bottom, IDLLayoutMeasureSpecModeAtMost);
+        childHeightMeasureSpec = IDLLayoutMeasureSpecMake(myHeight - padding.top - padding.bottom, myHeight != -1 ? IDLLayoutMeasureSpecModeAtMost : IDLLayoutMeasureSpecModeUnspecified);
     }
     [child measureWithWidthMeasureSpec:childWidthMeasureSpec heightMeasureSpec:childHeightMeasureSpec];
 }
