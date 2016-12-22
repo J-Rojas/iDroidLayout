@@ -102,11 +102,15 @@
         }
     }
 
+    UIView* firstChild = self.subviews.firstObject;
+    IDLLayoutParams * layoutParams = self.layoutParams;
+
     IDLLayoutMeasuredSize measuredSize;
     measuredSize.width.state = IDLLayoutMeasuredStateNone;
-    measuredSize.width.size = widthMeasureSpec.size;
+    measuredSize.width.size = layoutParams.width == IDLLayoutParamsSizeWrapContent ? firstChild.measuredSize.width : widthMeasureSpec.size;
     measuredSize.height.state = IDLLayoutMeasuredStateNone;
-    measuredSize.height.size = heightMeasureSpec.size;
+    measuredSize.height.size = layoutParams.height == IDLLayoutParamsSizeWrapContent ? firstChild.measuredSize.height : heightMeasureSpec.size;
+
     [self setMeasuredDimensionSize:measuredSize];
 }
 
@@ -129,15 +133,8 @@
     [super layoutSubviews];
     if (!CGRectEqualToRect(self.frame, _lastFrame) || self.isLayoutRequested) {
         NSDate *methodStart = [NSDate date];
+        [self measureAndLayout];
         _lastFrame = self.frame;
-        IDLLayoutMeasureSpec widthMeasureSpec;
-        IDLLayoutMeasureSpec heightMeasureSpec;
-        widthMeasureSpec.size = self.frame.size.width;
-        heightMeasureSpec.size = self.frame.size.height;
-        widthMeasureSpec.mode = IDLLayoutMeasureSpecModeExactly;
-        heightMeasureSpec.mode = IDLLayoutMeasureSpecModeExactly;
-        [self measureWithWidthMeasureSpec:widthMeasureSpec heightMeasureSpec:heightMeasureSpec];
-        [self layoutWithFrame:self.frame];
         NSDate *methodFinish = [NSDate date];
         NSTimeInterval executionTime = [methodFinish timeIntervalSinceDate:methodStart];
         NSLog(@"Relayout took %.2fms", executionTime*1000);
@@ -246,6 +243,23 @@
         [super setFrame:frame];
     }
 
+}
+
+- (void)measureAndLayout {
+    IDLLayoutParams * layoutParams = self.layoutParams;
+
+    IDLLayoutMeasureSpec widthMeasureSpec;
+    IDLLayoutMeasureSpec heightMeasureSpec;
+    widthMeasureSpec.size = self.frame.size.width;
+    heightMeasureSpec.size = self.frame.size.height;
+    widthMeasureSpec.mode = layoutParams.width == IDLLayoutParamsSizeWrapContent ? IDLLayoutMeasureSpecModeUnspecified : IDLLayoutMeasureSpecModeExactly;
+    heightMeasureSpec.mode = layoutParams.height == IDLLayoutParamsSizeWrapContent ? IDLLayoutMeasureSpecModeUnspecified : IDLLayoutMeasureSpecModeExactly;
+
+    [self measureWithWidthMeasureSpec:widthMeasureSpec heightMeasureSpec:heightMeasureSpec];
+
+    CGRect rect = {self.frame.origin, self.measuredSize};
+    self.frame = rect;
+    [self layoutWithFrame:rect];
 }
 
 @end
