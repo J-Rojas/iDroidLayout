@@ -10,7 +10,7 @@
 #import "NSDictionary+IDL_ResourceManager.h"
 #import <objc/runtime.h>
 
-static const char* kIDLUITextFieldColorStateList = "IDLUITextFieldColorStateList";
+static const char *kIDLUITextFieldColorStateList = "IDLUITextFieldColorStateList";
 
 @implementation UITextField (IDL_View)
 
@@ -24,12 +24,19 @@ static const char* kIDLUITextFieldColorStateList = "IDLUITextFieldColorStateList
     [self setInputType:[attrs stringFromIDLValueForKey:@"inputType"]];
 
     //placeholder
-    NSString* text = attrs[@"hint"];
-    if ([[IDLResourceManager currentResourceManager] isValidIdentifier:text]) {
-        NSString *title = [[IDLResourceManager currentResourceManager] stringForIdentifier:text];
-        self.placeholder = title;
+    NSString *placeholderText = attrs[@"hint"];
+    NSString *placeholderString;
+    if ([[IDLResourceManager currentResourceManager] isValidIdentifier:placeholderText]) {
+        placeholderString = [[IDLResourceManager currentResourceManager] stringForIdentifier:placeholderText];
     } else {
-        self.placeholder = text;
+        placeholderString = placeholderText;
+    }
+
+    UIColor *hintColor = [attrs colorFromIDLValueForKey:@"hintColor"];
+    if (hintColor != nil) {
+        self.attributedPlaceholder = [[NSAttributedString alloc] initWithString:placeholderString attributes:@{NSForegroundColorAttributeName: hintColor}];
+    } else {
+        self.placeholder = placeholderString;
     }
 
     IDLColorStateList *textColorStateList = [attrs colorStateListFromIDLValueForKey:@"textColor"];
@@ -55,7 +62,7 @@ static const char* kIDLUITextFieldColorStateList = "IDLUITextFieldColorStateList
     }
 }
 
-- (void)setInputType: (NSString*) inputType {
+- (void)setInputType:(NSString *)inputType {
 
     if ([inputType containsString:@"textEmailAddress"]) {
         self.keyboardType = UIKeyboardTypeEmailAddress;
@@ -92,7 +99,6 @@ static const char* kIDLUITextFieldColorStateList = "IDLUITextFieldColorStateList
 }
 
 
-
 - (void)setGravity:(IDLViewContentGravity)gravity {
     if ((gravity & IDLViewContentGravityLeft) == IDLViewContentGravityLeft) {
         self.textAlignment = NSTextAlignmentLeft;
@@ -103,11 +109,11 @@ static const char* kIDLUITextFieldColorStateList = "IDLUITextFieldColorStateList
     }
 }
 
-- (void) setTextColorList: (IDLColorStateList *) list {
+- (void)setTextColorList:(IDLColorStateList *)list {
     objc_setAssociatedObject(self, kIDLUITextFieldColorStateList, list, OBJC_ASSOCIATION_RETAIN);
 }
 
-- (IDLColorStateList *) textColorList {
+- (IDLColorStateList *)textColorList {
     return objc_getAssociatedObject(self, kIDLUITextFieldColorStateList);
 }
 
