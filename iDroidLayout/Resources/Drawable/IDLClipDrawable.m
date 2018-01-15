@@ -86,7 +86,7 @@ IDLClipDrawableOrientation IDLClipDrawableOrientationFromString(NSString *string
         if ((orientation & IDLClipDrawableOrientationHorizontal) != 0) {
             w -= (w - iw) * (10000 - level) / 10000;
         }
-        int h = bounds.size.height;
+        CGFloat h = bounds.size.height;
         CGFloat ih = 0; //mClipState.mDrawable.getIntrinsicHeight();
         if ((orientation & IDLClipDrawableOrientationVertical) != 0) {
             h -= (h - ih) * (10000 - level) / 10000;
