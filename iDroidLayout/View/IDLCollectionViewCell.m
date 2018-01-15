@@ -38,9 +38,6 @@
     for (UIView* subview in _layoutBridge.subviews)
         [subview removeFromSuperview];
     [inflater inflateResource:resource intoRootView:_layoutBridge attachToRoot:TRUE];
-
-    [_layoutBridge requestLayout];
-    [_layoutBridge layoutSubviews];
 }
 
 - (void) setLayoutURL:(NSURL *)url {
@@ -52,9 +49,6 @@
     for (UIView* subview in _layoutBridge.subviews)
         [subview removeFromSuperview];
     [inflater inflateURL:url intoRootView:_layoutBridge attachToRoot:TRUE];
-
-    [_layoutBridge requestLayout];
-    [_layoutBridge layoutSubviews];
 }
 
 - (BOOL)isViewGroup {
